@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  api:
+    container_name: api
+    ports:
+      - "1337:1337"
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    environment:
+      NODE_ENV: development
+      CONFIG_CORS_ALLOW_ORIGINS: '*'
+      MONGO_CONNECTION: mongodb:27017/mongster
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  admin:
+    container_name: admin
+    ports:
+      - "8080:80"
+    build:
+      context: .
+      dockerfile: Dockerfile-admin
+    depends_on:
+      - api
+
+  mongodb:
+    container_name: mongo
+    image: bitnami/mongodb:4.1
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/bitnami
+
+volumes:
+  mongodb_data:
+    driver: local

@@ -1,0 +1,23 @@
+FROM node:10.14.1-alpine
+LABEL MAINTAINER="Daniel Rataj <daniel.rataj@mall.cz>"
+
+RUN apk add --no-cache openssl=1.0.2r-r0 \
+  && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+COPY api/package.json .
+RUN npm install --quiet
+
+# copy required app files
+COPY api/api ./api
+COPY api/config/ ./config
+COPY api/static/ ./static
+COPY api/app.js ./app.js
+COPY api/.sailsrc ./.sailsrc
+
+# start Sails app
+CMD [ "npm", "start" ]
+
+# expose port for Node
+EXPOSE 1337
