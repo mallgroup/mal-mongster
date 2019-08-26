@@ -1,0 +1,15 @@
+FROM node:12.8.1-alpine
+LABEL MAINTAINER="Daniel Rataj <daniel.rataj@mall.cz>"
+
+WORKDIR /app
+
+# install quasar globally
+RUN yarn global add @quasar/cli@1.0.0
+
+# install dependencies
+RUN yarn install
+
+CMD ["/bin/sh"]
+
+# expose port for Node server
+EXPOSE 8080

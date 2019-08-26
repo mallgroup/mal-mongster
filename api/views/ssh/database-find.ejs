@@ -1,0 +1,14 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var dbs = db.adminCommand( { listDatabases: 1 } );
+    var result = {};
+    result.databases = dbs.databases.filter((db) => ['admin', 'config', 'local'].indexOf(db.name) === -1) || [];
+    result.totalSize = dbs.totalSize;
+    result
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_DATABASE_LIST.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`$RESULT`) %>"

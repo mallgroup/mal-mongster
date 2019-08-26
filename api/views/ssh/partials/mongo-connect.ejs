@@ -1,0 +1,5 @@
+docker exec <%= CONTAINER_NAME %> \
+    mongo -u "<%= MONGO_INITDB_ROOT_USERNAME %>" \
+    -p "<%= MONGO_INITDB_ROOT_PASSWORD %>" \
+    --authenticationDatabase "<%= AUTHENTICATION_DATABASE %>" \
+    --quiet

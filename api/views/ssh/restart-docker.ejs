@@ -1,0 +1,3 @@
+
+docker restart <%= CONTAINER_NAME %> &> /dev/null || echo "<%= status.error(errors.NODE_RESTART_DOCKER.message) %> && exit 1"
+echo "<%- status.success(`ok`) %>"

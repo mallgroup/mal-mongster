@@ -1,0 +1,10 @@
+<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    rs.remove('<%= REPLICA_HOST %>:<%= MONGO_PORT %>').ok
+" &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.REPLICA_REMOVE_REPLICA_FAILED.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`ok`) %>"

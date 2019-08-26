@@ -1,0 +1,16 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var db = db.getSiblingDB('<%= DATABASE %>');
+    db.createUser({
+        user: '<%= USERNAME %>',
+        pwd: '<%= PASSWORD %>',
+        roles: [ { role: 'readWrite', db: '<%= DATABASE %>' } ]
+    });
+
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_USER_CREATE.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`ok`) %>"
