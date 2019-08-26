@@ -12,25 +12,25 @@ Now you can easily connect your nodes with Mongo DB into one cluster within cont
  - Restart Docker container.
  - Create a database, manage users.
 
-We believe the security is important.
+We believe that security is essential.
  - So every password or SSH key is also encrypted.
- - It is completely up to you where you store application data.
+ - It is entirely up to you where you store application data.
 
 # Prerequisities
-You need a latest version of [Docker](https://www.docker.com/) installed on your computer.
+You need the latest version of [Docker](https://www.docker.com/) installed on your computer.
 
 ## Run Docker Compose
 
-Run all Docker containers on background at once.
+Run all Docker containers on the background at once.
 
 ```sh
 docker-compose down && docker-compose up -d
 ```
 
-Admin panel will appear on URL http://localhost:8080
+Admin panel appears on URL http://localhost:8080
 
 ### Database
-Mongster uses custom MongoDB to store all data. Database data directory is placed in Docker volume that is created on start up. So in case you remove all volumes you also lose data you stored into this database. So it is highly recommend to mount data directory somewhere else.
+Mongster uses custom MongoDB to store all data. The database data directory is placed in Docker volume that is created on startup. So in case you, remove all volumes you also lose data you stored into this database. So it is highly recommended to mount data directory somewhere else.
 
 #### Change volumes
 In case you remove volumes, you also lose the data you saved earlier. So it might be useful to map Mongo volume to some other location on your disk.
@@ -49,11 +49,11 @@ volumes:
   - ./my_local_db_folder:/bitnami
 ```
 
-You can replace `./my_local_db_folder` with the directory you expect the Mongo will store the data.
+You can replace `./my_local_db_folder` with the directory you expect the Mongo stores the data.
 
 
 ### Local development
-You also might be interested in local development. We'll appreciate any code that will make this product just better.
+You also might be interested in local development. We'll appreciate any code that makes this product just better.
 
  - [Local Development](/docs/development.md)
 
