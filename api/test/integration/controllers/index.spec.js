@@ -1,6 +1,6 @@
 var supertest = require('supertest')
 
-describe('IndexController.index', () => {
+describe('Index page', () => {
   it('should show status info', (done) => {
     supertest(sails.hooks.http.app)
       .post('/')
