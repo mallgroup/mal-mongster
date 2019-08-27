@@ -36,6 +36,7 @@ module.exports = {
 
       item.ssh = strongCrypter.decrypt(item.ssh, key.value, `hex`)
       item.password = strongCrypter.decrypt(item.password, key.value, `hex`)
+      item.authKey = strongCrypter.decrypt(item.authKey, key.value, `hex`)
 
       return exits.success(JSend.success(item))
     } else {
@@ -46,6 +47,7 @@ module.exports = {
         try {
           item.ssh = strongCrypter.decrypt(item.ssh, key.value, `hex`)
           item.password = strongCrypter.decrypt(item.password, key.value, `hex`)
+          item.authKey = strongCrypter.decrypt(item.authKey, key.value, `hex`)
         } catch (err) {
           if (err) {
             // do nothing

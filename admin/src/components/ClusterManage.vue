@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row q-gutter-md">
       <div class="col">
         <q-input
           v-model="form.user"
@@ -66,7 +66,7 @@
         Your password is going to be encrypted in the database.
       </div>
     </div>
-    <div class="row q-mt-md">
+    <div class="row">
       <div class="col">
         <q-input
           v-model="form.authenticationDatabase"
@@ -109,7 +109,7 @@
             <br>
             There is no backup solution at all. So you should remember to protect your data yourself.
           </li>
-          <li>
+          <li v-if="!form.authKey">
             <strong>Key File</strong>
             <br>
             Is generated automatically for you.
@@ -169,7 +169,8 @@ export default {
         ssh: '',
         user: '',
         password: '',
-        authenticationDatabase: 'admin'
+        authenticationDatabase: 'admin',
+        authKey: ''
       }
     }
   },
@@ -181,6 +182,7 @@ export default {
       this.form.ssh = this.cluster.ssh
       this.form.user = this.cluster.user
       this.form.password = this.cluster.password
+      this.form.authKey = this.cluster.authKey
     }
   },
   methods: {
