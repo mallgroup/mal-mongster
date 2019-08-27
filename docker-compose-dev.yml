@@ -22,23 +22,23 @@ services:
     depends_on:
       - mongodb
 
-  # admin:
-  #   container_name: admin
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./admin:/app
-  #   command: quasar dev
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-quasar
-  #   restart: "no"
-  #   stdin_open: true
-  #   tty: true
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   depends_on:
-  #     - api
+  admin:
+    container_name: admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./admin:/app
+    command: quasar dev
+    build:
+      context: .
+      dockerfile: Dockerfile-quasar
+    restart: "no"
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - api
 
   mongodb:
     container_name: mongo
