@@ -1,15 +1,10 @@
 var sails = require('sails')
-
-let mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => { done(err) })
-  }
-}
+var mochaAsync = require('./helpers/async')
 
 // Before running any tests...
 before(function (done) {
   // Increase the Mocha timeout so that Sails has enough time to lift, even if you have a bunch of assets.
-  this.timeout(10000)
+  this.timeout(5000)
 
   sails.lift({
     // Your Sails app's configuration files will be loaded automatically,
@@ -36,7 +31,7 @@ after(mochaAsync(async (done) => {
     await Cluster.destroy({})
     await Node.destroy({})
     await Database.destroy({})
-    await Configuration.destroy({})
+    await Configuration.destroy({}) // do not destroy configuration table. It is created only once.
   } catch (err) {
     if (err) {
       sails.log.error(err)
