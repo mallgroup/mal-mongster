@@ -26,7 +26,7 @@
     "start": "NODE_ENV=production node app.js",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "MONGO_CONNECTION=$MONGO_CONNECTION node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/**/**/*.spec.js",
+    "custom-tests": "MONGO_CONNECTION=$MONGO_CONNECTION node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/**/*.spec.js",
     "dev": "nodemon -L index.js"
   },
   "main": "app.js",

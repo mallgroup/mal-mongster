@@ -16,8 +16,10 @@ module.exports = {
 
   exits: {
     clusterHasNodes: {
-      description: 'Cluster has nodes.',
       responseType: 'clusterHasNodes'
+    },
+    notFound: {
+      responseType: 'notFound'
     }
   },
 
@@ -29,6 +31,10 @@ module.exports = {
     }
 
     cluster = await Cluster.destroy(inputs.id).fetch()
+
+    if (!cluster) {
+      return exits.notFound()
+    }
 
     return exits.success(JSend.success(cluster[0]))
   }
