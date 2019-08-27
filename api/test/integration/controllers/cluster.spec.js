@@ -41,6 +41,7 @@ describe('Cluster', () => {
         ssh: `ssh`,
         user: `admin`,
         password: `admin`,
+        authKey: `authKey`,
         authenticationDatabase: `admin`
       })
       .expect(200, done)
