@@ -11,7 +11,7 @@ Please consider to learn more about [MongoDB](https://www.mongodb.org/). It is a
 
 ## General
 
-## `What version of Mongo is supported?`
+#### `What version of Mongo is supported?`
 All Docker containers start MongoDB version 4.0.12
 
 #### `The UI seems to be slower when I make some change`
