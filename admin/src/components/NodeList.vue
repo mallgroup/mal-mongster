@@ -198,7 +198,7 @@ export default {
 
   methods: {
     buildConnectionString () {
-      let url = `mongodb://HOST:PASSWORD@`
+      let url = `mongodb://USER:PASSWORD@`
       let nodes = []
       if (this.cluster.nodes.length) {
         for (let clusterKey in this.cluster.nodes) {
