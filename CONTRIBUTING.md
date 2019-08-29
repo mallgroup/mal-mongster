@@ -3,7 +3,7 @@ We appreciate any commit that we can proudly merge into Mongster.
 # Installation
 Please read [development section](/docs/development.md).
 
-# Note
+## Note
 When contributing to this repository, please first discuss the change you wish to make with [MALL Group](http://github.com/mallgroup) via [issue](https://github.com/mallgroup/mal-mongster/issues) before making a change.
 
 ## Pull Request Process
