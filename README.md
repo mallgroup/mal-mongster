@@ -20,7 +20,7 @@ We believe that security is essential.
 -   So every password or SSH key is also encrypted.
 -   It is entirely up to you where you store application data.
 
-# Prerequisities
+## Prerequisities
 
 You need the latest version of [Docker](https://www.docker.com/) installed on your computer.
 
