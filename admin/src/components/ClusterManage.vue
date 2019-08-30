@@ -82,7 +82,7 @@
           :error="$v.form.authenticationDatabase.$error"
           error-message="Check the authentication database option."
           label="Authentication Database *"
-          :hint="form.id.length ?  `Already configured.` : `Database that holds authentication.`"
+          :hint="form.id.length ? `Already configured.` : `Database that holds authentication.`"
           @blur="$v.form.authenticationDatabase.$touch"
           @keyup.enter="save()"
         />
