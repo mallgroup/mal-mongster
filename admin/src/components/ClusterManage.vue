@@ -35,14 +35,16 @@
         </div>
       </div>
     </div>
-    <div class="row q-gutter-md">
+    <div class="row q-gutter-sm  q-mt-sm q-mb-md">
       <div class="col">
         <q-input
           v-model="form.user"
+          :readonly="form.id.length"
+          :disable="form.id.length"
           :error="$v.form.user.$error"
           error-message="Check the root user name."
           label="User *"
-          hint="Root user for your database."
+          :hint="form.id.length ? `Already configured.` : `Root user for your database.`"
           @blur="$v.form.user.$touch"
           @keyup.enter="save()"
         />
@@ -50,18 +52,23 @@
       <div class="col">
         <q-input
           v-model="form.password"
+          :readonly="form.id.length"
+          :disable="form.id.length"
           :error="$v.form.password.$error"
           error-message="Check the root user's password."
           type="password"
           label="Password *"
-          hint="Root users's password."
+          :hint="form.id.length ? `Already configured.` : `Root users's password.`"
           @blur="$v.form.password.$touch"
           @keyup.enter="save()"
         />
       </div>
     </div>
-    <div class="row">
-      <div class="col q-mt-sm q-mb-md">
+    <div
+      v-if="!form.id.length"
+      class="row q-mb-md"
+    >
+      <div class="col">
         <q-icon name="info" />
         Your password is going to be encrypted in the database.
       </div>
@@ -70,10 +77,12 @@
       <div class="col">
         <q-input
           v-model="form.authenticationDatabase"
+          :readonly="form.id.length"
+          :disable="form.id.length"
           :error="$v.form.authenticationDatabase.$error"
           error-message="Check the authentication database option."
           label="Authentication Database *"
-          hint="Database that holds authentication."
+          :hint="form.id.length ?  `Already configured.` : `Database that holds authentication.`"
           @blur="$v.form.authenticationDatabase.$touch"
           @keyup.enter="save()"
         />
@@ -99,6 +108,11 @@
           Notes
         </h6>
         <ul>
+          <li>
+            <strong>Admin Credentials</strong>
+            <br>
+            You cannot change admin credentials and authentication database once configured.
+          </li>
           <li>
             <strong>Volume</strong>
             <br>
