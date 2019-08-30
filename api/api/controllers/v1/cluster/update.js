@@ -3,6 +3,10 @@ const strongCrypter = require('strong-cryptor')
 let attrs = JSON.parse(JSON.stringify(Cluster.attributes))
 delete attrs.nodes
 delete attrs.databases
+delete attrs.password
+delete attrs.authKey
+delete attrs.user
+delete attrs.authenticationDatabase
 
 module.exports = {
 
@@ -35,8 +39,6 @@ module.exports = {
     })
 
     inputs.ssh = strongCrypter.encrypt(inputs.ssh, key.value, 'hex')
-    inputs.password = strongCrypter.encrypt(inputs.password, key.value, 'hex')
-    inputs.authKey = strongCrypter.encrypt(inputs.authKey, key.value, 'hex')
 
     cluster = await Cluster.update({
       id: inputs.id
