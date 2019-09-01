@@ -44,11 +44,11 @@ before_install:
 
 script:
   - cd ..
-  - sonar-scanner
   - cd api
   - npm test
   - cd ../admin
   - yarn test
+  - sonar-scanner
 
 jdk:
   - oraclejdk8
