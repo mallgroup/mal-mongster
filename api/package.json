@@ -21,13 +21,14 @@
     "mocha": "^6.2.0",
     "nodemon": "^1.17.5",
     "nyc": "^14.1.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "sinon": "^7.4.1"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov mocha test/lifecycle.test.js test/integration/**/*.spec.js",
+    "custom-tests": "./node_modules/.bin/nyc --reporter=lcov mocha test/lifecycle.test.js test/integration/**/*.spec.js test/unit/*.spec.js",
     "dev": "nodemon -L index.js"
   },
   "main": "app.js",
