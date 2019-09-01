@@ -44,7 +44,9 @@ module.exports = {
       return exits.noNodesInCluster()
     }
 
-    let primaryHost = await sails.helpers.nodeFindPrimary(cluster.nodes).tolerate(`noPrimaryInCluster`, () => false)
+    let primaryHost = await sails.helpers.nodeFindPrimary(cluster.nodes)
+      .tolerate(`noPrimaryInCluster`, () => false)
+      .tolerate(`sshExecutionFailed`, () => false)
 
     if (primaryHost) {
       // remove replica from cluster on PRIMARY node
