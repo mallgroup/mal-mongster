@@ -48,6 +48,7 @@ script:
   - npm test
   - cd ../admin
   - yarn test
+  - cd ..
   - sonar-scanner
 
 jdk:
