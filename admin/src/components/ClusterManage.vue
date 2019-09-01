@@ -39,8 +39,8 @@
       <div class="col">
         <q-input
           v-model="form.user"
-          :readonly="form.id.length"
-          :disable="form.id.length"
+          :readonly="form.id.length > 0"
+          :disable="form.id.length > 0"
           :error="$v.form.user.$error"
           error-message="Check the root user name."
           label="User *"
@@ -52,8 +52,8 @@
       <div class="col">
         <q-input
           v-model="form.password"
-          :readonly="form.id.length"
-          :disable="form.id.length"
+          :readonly="form.id.length > 0"
+          :disable="form.id.length > 0"
           :error="$v.form.password.$error"
           error-message="Check the root user's password."
           type="password"
@@ -77,12 +77,12 @@
       <div class="col">
         <q-input
           v-model="form.authenticationDatabase"
-          :readonly="form.id.length"
-          :disable="form.id.length"
+          :readonly="form.id.length > 0"
+          :disable="form.id.length > 0"
           :error="$v.form.authenticationDatabase.$error"
           error-message="Check the authentication database option."
           label="Authentication Database *"
-          :hint="form.id.length ? `Already configured.` : `Database that holds authentication.`"
+          :hint="form.id.length ? `Already configured.` : `Admin DB that holds authentication. Do not change the option if not necessary.`"
           @blur="$v.form.authenticationDatabase.$touch"
           @keyup.enter="save()"
         />
