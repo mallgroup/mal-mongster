@@ -22,7 +22,16 @@ We believe that security is essential.
 
 ## Prerequisities
 
-You need the latest version of [Docker](https://www.docker.com/) installed on your computer.
+You need GIT and [Docker](https://www.docker.com/) installed on your computer, both up to date.
+
+## Clone repository
+Clone the master branch and switch the branch to the latest tag.
+
+```sh
+git clone git@github.com:mallgroup/mal-mongster.git
+cd mal-mongster
+git checkout tags/v1.0.1 -b v1.0.1
+```
 
 ## Run Docker Compose
 
