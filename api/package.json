@@ -28,7 +28,7 @@
     "start": "NODE_ENV=production node app.js",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "./node_modules/.bin/nyc --reporter=lcov mocha test/lifecycle.test.js test/integration/**/*.spec.js test/unit/*.spec.js",
+    "custom-tests": "./node_modules/.bin/nyc --reporter=lcov mocha test/lifecycle.test.js test/integration/**/*.spec.js test/unit/**/*.spec.js",
     "dev": "nodemon -L index.js"
   },
   "main": "app.js",
