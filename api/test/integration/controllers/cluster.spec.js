@@ -1,6 +1,8 @@
 let supertest = require('supertest')
 let faker = require('faker')
 let cluster
+let createCluster = require('../../helpers/create-cluster')
+let createNodeInCluster = require('../../helpers/create-node-in-cluster')
 
 describe('Cluster', () => {
   it('create cluster', (done) => {
@@ -51,6 +53,23 @@ describe('Cluster', () => {
     supertest(sails.hooks.http.app)
       .delete(`/v1/cluster/${cluster.id}`)
       .expect(200, done)
+  })
+
+  // just repeat it for the same purpose
+  it(`delete cluster that does not exists`, (done) => {
+    supertest(sails.hooks.http.app)
+      .delete(`/v1/cluster/${cluster.id}`)
+      .expect(404, done)
+  })
+
+  it(`delete cluster with some nodes within is not possible`, (done) => {
+    createCluster().then((cluster) => {
+      createNodeInCluster(cluster).then(() => {
+        supertest(sails.hooks.http.app)
+          .delete(`/v1/cluster/${cluster.id}`)
+          .expect(400, done)
+      })
+    })
   })
 
   it(`cluster not found`, (done) => {
