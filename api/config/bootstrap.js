@@ -26,20 +26,7 @@ module.exports.bootstrap = async function (done) {
   // ]);
   // ```
 
-  // create 32 length key for cyphering in case it does not exists yet
-  try {
-    let secureKey = await sails.helpers.random(32)
-    await Configuration.findOrCreate({
-      option: `encryption_key`
-    }, {
-      option: `encryption_key`,
-      value: secureKey
-    })
-  } catch (err) {
-    if (err) {
-      sails.log.error(err)
-    }
-  }
+  await sails.helpers.generateSecurityKey()
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

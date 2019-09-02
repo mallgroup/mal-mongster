@@ -1,14 +1,14 @@
 const sinon = require('sinon')
 
 const responsesToTest = {
-  alreadyExists: require('../../../api/api/responses/alreadyExists'),
-  clusterHasNodes: require('../../../api/api/responses/clusterHasNodes'),
-  clusterNotFound: require('../../../api/api/responses/clusterNotFound'),
-  nodeNotFound: require('../../../api/api/responses/nodeNotFound'),
-  noNodesInCluster: require('../../../api/api/responses/noNodesInCluster'),
-  noPrimaryInCluster: require('../../../api/api/responses/noPrimaryInCluster'),
-  wrongStatus: require('../../../api/api/responses/wrongStatus'),
-  sshExecutionFailed: require('../../../api/api/responses/sshExecutionFailed')
+  alreadyExists: require('../../../api/responses/alreadyExists'),
+  clusterHasNodes: require('../../../api/responses/clusterHasNodes'),
+  clusterNotFound: require('../../../api/responses/clusterNotFound'),
+  nodeNotFound: require('../../../api/responses/nodeNotFound'),
+  noNodesInCluster: require('../../../api/responses/noNodesInCluster'),
+  noPrimaryInCluster: require('../../../api/responses/noPrimaryInCluster'),
+  wrongStatus: require('../../../api/responses/wrongStatus'),
+  sshExecutionFailed: require('../../../api/responses/sshExecutionFailed')
 }
 
 describe('Response', () => {
