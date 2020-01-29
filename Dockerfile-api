@@ -1,7 +1,7 @@
 FROM node:10.14.1-alpine
 LABEL MAINTAINER="Daniel Rataj <daniel.rataj@mall.cz>"
 
-RUN apk add --no-cache openssl=1.0.2r-r0 \
+RUN apk add --no-cache openssl=1.0.2u-r0 \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /app
