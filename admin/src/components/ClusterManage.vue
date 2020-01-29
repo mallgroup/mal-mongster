@@ -35,59 +35,78 @@
         </div>
       </div>
     </div>
-    <div class="row q-gutter-sm  q-mt-sm q-mb-md">
-      <div class="col">
-        <q-input
-          v-model="form.user"
-          :readonly="form.id.length > 0"
-          :disable="form.id.length > 0"
-          :error="$v.form.user.$error"
-          error-message="Check the root user name."
-          label="User *"
-          :hint="form.id.length ? `Already configured.` : `Root user for your database.`"
-          @blur="$v.form.user.$touch"
-          @keyup.enter="save()"
-        />
-      </div>
-      <div class="col">
-        <q-input
-          v-model="form.password"
-          :readonly="form.id.length > 0"
-          :disable="form.id.length > 0"
-          :error="$v.form.password.$error"
-          error-message="Check the root user's password."
-          type="password"
-          label="Password *"
-          :hint="form.id.length ? `Already configured.` : `Root users's password.`"
-          @blur="$v.form.password.$touch"
-          @keyup.enter="save()"
-        />
-      </div>
-    </div>
+
     <div
-      v-if="!form.id.length"
-      class="row q-mb-md"
+      :class="{ 'shadow-1 q-pa-md' : form.user && form.password && form.authenticationDatabase && form.authKey }"
     >
-      <div class="col">
-        <q-icon name="info" />
-        Your password is going to be encrypted in the database.
+      <p
+        v-if="form.user && form.password && form.authenticationDatabase && form.authKey"
+        class="text-red"
+      >
+        Credentials listed bellow has already been configured.<br>
+        It is really risky to update these values.
+      </p>
+      <div class="row q-gutter-sm  q-mt-sm q-mb-md">
+        <div class="col">
+          <q-input
+            v-model="form.user"
+            :error="$v.form.user.$error"
+            error-message="Check the root user name."
+            label="User *"
+            :hint="form.id.length ? `Already configured.` : `Root user for your database.`"
+            @blur="$v.form.user.$touch"
+            @keyup.enter="save()"
+          />
+        </div>
+        <div class="col">
+          <q-input
+            v-model="form.password"
+            :error="$v.form.password.$error"
+            error-message="Check the root user's password."
+            label="Password *"
+            :hint="form.id.length ? `Already configured.` : `Root users's password.`"
+            @blur="$v.form.password.$touch"
+            @keyup.enter="save()"
+          />
+        </div>
+      </div>
+      <div
+        v-if="!form.id.length"
+        class="row q-mb-md"
+      >
+        <div class="col">
+          <q-icon name="info" />
+          Your password is going to be encrypted in the database.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <q-input
+            v-model="form.authenticationDatabase"
+            :error="$v.form.authenticationDatabase.$error"
+            error-message="Check the authentication database option."
+            label="Authentication Database *"
+            :hint="form.id.length ? `Already configured.` : `Admin DB that holds authentication. Do not change the option if not necessary.`"
+            @blur="$v.form.authenticationDatabase.$touch"
+            @keyup.enter="save()"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <q-input
+            v-model="form.authKey"
+            :error="$v.form.authKey.$error"
+            error-message="Check the authentication key."
+            label="Auth Key *"
+            :hint="form.id.length ? `Already configured.` : `Auth key is the key Mongo instances are communicating within each other. It should has 256 characters. We created one for you automatically.`"
+            @blur="$v.form.authKey.$touch"
+            @keyup.enter="save()"
+          />
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <q-input
-          v-model="form.authenticationDatabase"
-          :readonly="form.id.length > 0"
-          :disable="form.id.length > 0"
-          :error="$v.form.authenticationDatabase.$error"
-          error-message="Check the authentication database option."
-          label="Authentication Database *"
-          :hint="form.id.length ? `Already configured.` : `Admin DB that holds authentication. Do not change the option if not necessary.`"
-          @blur="$v.form.authenticationDatabase.$touch"
-          @keyup.enter="save()"
-        />
-      </div>
-    </div>
+
     <div class="row q-mt-lg text-right">
       <div class="col">
         <q-btn
@@ -123,18 +142,6 @@
             <br>
             There is no backup solution at all. So you should remember to protect your data yourself.
           </li>
-          <li v-if="!form.authKey">
-            <strong>Key File</strong>
-            <br>
-            Is generated automatically for you.
-            <a
-              href="https://docs.mongodb.com/manual/reference/configuration-options/#security.keyFile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              More details about the keyfile option.
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -143,6 +150,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
+import passwordGenerator from 'password-generator'
 
 export default {
   name: 'ComponentClusterAdd',
@@ -161,6 +169,9 @@ export default {
         required
       },
       authenticationDatabase: {
+        required
+      },
+      authKey: {
         required
       }
     }
@@ -184,7 +195,7 @@ export default {
         user: '',
         password: '',
         authenticationDatabase: 'admin',
-        authKey: ''
+        authKey: passwordGenerator(256, false)
       }
     }
   },

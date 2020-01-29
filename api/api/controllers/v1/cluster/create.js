@@ -5,7 +5,6 @@ let attrs = JSON.parse(JSON.stringify(Cluster.attributes))
 delete attrs.id
 delete attrs.nodes
 delete attrs.databases
-delete attrs.authKey
 
 module.exports = {
 
@@ -23,8 +22,6 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    inputs.authKey = await sails.helpers.random(256)
-
     // find first to avoid duplicates
     let cluster = await Cluster.findOne({
       name: inputs.name

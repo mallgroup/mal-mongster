@@ -17,3 +17,5 @@ yarn-error.log*
 .nyc_output
 coverage
 *.lcov
+
+docker-compose-dev.yml
