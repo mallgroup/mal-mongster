@@ -1,0 +1,12 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var db = db.getSiblingDB('<%= DB_NAME %>');
+    db.runCommand( { dropAllUsersFromDatabase: 1 }).ok;
+    db.dropDatabase().ok;
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_DATABASE_DELETE.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`ok`) %>"

@@ -1,0 +1,19 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var cfg = rs.config()
+    cfg.members = cfg.members.map((node) => {
+        if (node.host === '<%= PRIORITY_HOSTNAME %>:<%= MONGO_PORT %>') {
+            node.priority = node.priority + <%= PRIORITY_DIR %>
+            node.votes = node.priority > 0 ? 1 : 0
+        }
+        return node
+    })
+
+    rs.reconfig(cfg).ok === 0 ? 1 : 0 // we have to convert to unix based result
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_CHANGE_PRIORITY.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`$RESULT`) %>"

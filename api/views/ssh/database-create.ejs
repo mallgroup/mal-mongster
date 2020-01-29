@@ -1,0 +1,11 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var db = db.getSiblingDB('<%= DB_NAME %>');
+    db.bootstrap.insert({bootstrap: 1}).nInserted;
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_DATABASE_ADD.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`ok`) %>"

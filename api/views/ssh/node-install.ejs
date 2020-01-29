@@ -1,0 +1,40 @@
+if [ ! -x "$(command -v docker)" ]; then
+    echo "<%= status.error(errors.DOCKER_NOT_INSTALLED.message) %>"
+    exit 1
+fi
+
+<%- partial('./partials/node-cleanup').trim() %>
+
+mkdir -p "<%= DATA_DIR %>" &> /dev/null
+touch "<%= AUTH_KEY_FILENAME %>" &> /dev/null
+echo "<%= AUTH_KEY %>" > "<%= AUTH_KEY_FILE_PATH %>"
+chmod 400 "<%= AUTH_KEY_FILE_PATH %>"
+chown 999:999 "<%= AUTH_KEY_FILE_PATH %>"
+
+docker run -d --name <%= CONTAINER_NAME %>  \
+    --network "host" \
+    --restart "always" \
+    -v <%= DATA_DIR %>/db:<%= DATA_DIR %>/db \
+    -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
+    -e MONGO_INITDB_ROOT_USERNAME=<%= MONGO_INITDB_ROOT_USERNAME %> \
+    -e MONGO_INITDB_ROOT_PASSWORD=<%= MONGO_INITDB_ROOT_PASSWORD %> \
+    mongo:4.0.12-xenial &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
+
+docker cp <%= AUTH_KEY_FILE_PATH %> <%= CONTAINER_NAME %>:/<%= AUTH_KEY_FILE_PATH %> &> /dev/null
+sleep 1
+
+docker exec <%= CONTAINER_NAME %> bash -c 'chown -R 999:999 "<%= DATA_DIR %>"' &> /dev/null
+
+docker rm <%= CONTAINER_NAME %> -f &> /dev/null
+
+docker run -d --name <%= CONTAINER_NAME %>  \
+    --restart "always" \
+    --network "host" \
+    -v <%= AUTH_KEY_FILE_PATH %>:<%= AUTH_KEY_FILE_PATH %> \
+    -v <%= DATA_DIR %>/db:<%= DATA_DIR %>/db \
+    -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
+    mongo:4.0.12-xenial \
+    --keyFile "<%= AUTH_KEY_FILE_PATH %>" \
+    --replSet "<%= REPLICA_SET %>" &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
+
+echo "<%= status.success(`ok`) %>"

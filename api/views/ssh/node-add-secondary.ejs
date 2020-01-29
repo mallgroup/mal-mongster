@@ -1,0 +1,10 @@
+<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    rs.add( { host: '<%= HOSTNAME %>:<%= MONGO_PORT %>', priority: 0, votes: 0 } ).ok
+" &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.REPLICA_ADD_SECONDARY_FAILED.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`ok`) %>"
