@@ -25,7 +25,7 @@ We believe that security is essential.
 You need GIT and [Docker](https://www.docker.com/) installed on your computer, both up to date.
 
 ## Clone repository
-Clone the master branch and switch the branch to the latest tag.
+Clone the master branch.
 
 ```sh
 git clone git@github.com:mallgroup/mal-mongster.git
