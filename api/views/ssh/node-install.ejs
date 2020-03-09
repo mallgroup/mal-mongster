@@ -34,6 +34,7 @@ docker run -d --name <%= CONTAINER_NAME %>  \
     -v <%= AUTH_KEY_FILE_PATH %>:<%= AUTH_KEY_FILE_PATH %> \
     -v <%= DATA_DIR %>/db:<%= DATA_DIR %>/db \
     -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
+    -v <%= DATA_BACKUP_DIR %>:<%= DATA_BACKUP_DIR %> \
     mongo:4.0.12-xenial \
     --keyFile "<%= AUTH_KEY_FILE_PATH %>" \
     --replSet "<%= REPLICA_SET %>" &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)

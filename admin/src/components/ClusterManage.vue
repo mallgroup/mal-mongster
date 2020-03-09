@@ -1,12 +1,13 @@
 <template>
   <div class="q-ma-md">
     <h2 class="text-h4">
-      {{ form.id ? 'Update cluster' : 'New cluster' }}
+      {{ isEdit ? 'Cluster info' : 'New cluster' }}
     </h2>
     <div class="row">
       <div class="col">
         <q-input
           v-model="form.name"
+          :readonly="isEdit"
           :error="$v.form.name.$error"
           error-message="Check the name of your new cluster."
           label="Name *"
@@ -22,6 +23,7 @@
       <div class="col">
         <q-input
           v-model="form.ssh"
+          :readonly="isEdit"
           :error="$v.form.ssh.$error"
           error-message="Please enter your OpenSSH private key."
           type="textarea"
@@ -50,6 +52,7 @@
         <div class="col">
           <q-input
             v-model="form.user"
+            :readonly="isEdit"
             :error="$v.form.user.$error"
             error-message="Check the root user name."
             label="User *"
@@ -61,6 +64,7 @@
         <div class="col">
           <q-input
             v-model="form.password"
+            :readonly="isEdit"
             :error="$v.form.password.$error"
             error-message="Check the root user's password."
             label="Password *"
@@ -83,6 +87,7 @@
         <div class="col">
           <q-input
             v-model="form.authenticationDatabase"
+            :readonly="isEdit"
             :error="$v.form.authenticationDatabase.$error"
             error-message="Check the authentication database option."
             label="Authentication Database *"
@@ -96,6 +101,7 @@
         <div class="col">
           <q-input
             v-model="form.authKey"
+            :readonly="isEdit"
             :error="$v.form.authKey.$error"
             error-message="Check the authentication key."
             label="Auth Key *"
@@ -114,8 +120,8 @@
           class="q-mr-sm"
           @click="dialog.hide()"
         />
-        <q-btn
-          :label="`${form.id ? `Update` : `Add`} cluster`"
+        <q-btn v-if="!isEdit"
+          label="Add cluster"
           color="primary"
           @click="save()"
         />
@@ -195,8 +201,13 @@ export default {
         user: '',
         password: '',
         authenticationDatabase: 'admin',
-        authKey: passwordGenerator(256, false)
+        authKey: passwordGenerator(256, false, '^[a-zA-Z0-9]')
       }
+    }
+  },
+  computed: {
+    isEdit () {
+      return this.form.id !== ''
     }
   },
   created () {
@@ -212,6 +223,10 @@ export default {
   },
   methods: {
     async save () {
+      if (this.isEdit) {
+        return
+      }
+
       this.$v.form.$touch()
 
       if (this.$v.form.$error) {
