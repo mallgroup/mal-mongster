@@ -1,0 +1,2 @@
+echo "00 00 * * * <%= MONGO_DUMP_BASH_SCRIPT %> > /var/log/cronlog.log" >> /var/spool/cron/root
+service crond reload

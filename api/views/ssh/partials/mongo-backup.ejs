@@ -1,0 +1,18 @@
+mkdir -p "<%= BASH_SCRIPTS_DIR %>" &> /dev/null
+touch "<%= MONGO_DUMP_BASH_SCRIPT %>" &> /dev/null
+chmod +x "<%= MONGO_DUMP_BASH_SCRIPT %>"
+
+echo "#!/usr/bin/env bash
+
+  echo \"Delete files older than 7 days \"
+  find <%= DATA_BACKUP_DIR %> -mtime +7 -exec rm -rf {} \;
+
+  echo \"Exec mongodump... \"
+
+  NOW=\$(date +%F-%H_%M)
+
+  sudo docker exec \$(sudo docker ps -aqf \"name=mall_mongo\") mongodump --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --out <%= DATA_BACKUP_DIR %>/\${NOW}
+  sudo docker cp <%= CONTAINER_NAME %>:<%= DATA_BACKUP_DIR %>/\${NOW} <%= DATA_BACKUP_DIR %>/\${NOW} &> /dev/null
+
+  echo \"Done mongodump... \"
+" > "<%= MONGO_DUMP_BASH_SCRIPT %>"

@@ -1,7 +1,7 @@
 <template>
   <div class="q-ma-md">
     <h2 class="text-h4">
-      New cluster
+      {{ form.id ? 'Update cluster' : 'New cluster' }}
     </h2>
     <div class="row">
       <div class="col">
@@ -12,7 +12,7 @@
           label="Name *"
           hint="Name for your cluster."
           autofocus
-          maxlength="11"
+          maxlength="20"
           @blur="$v.form.name.$touch"
           @keyup.enter="save()"
         />
@@ -140,7 +140,7 @@
           <li>
             <strong>Backup</strong>
             <br>
-            There is no backup solution at all. So you should remember to protect your data yourself.
+            It uses tool mongodump, which saves data into folder <em>/data/backup</em> every day at 00:00
           </li>
         </ul>
       </div>
