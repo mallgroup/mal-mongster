@@ -1,2 +1,3 @@
-echo "00 00 * * * <%= MONGO_DUMP_BASH_SCRIPT %> > /var/log/cronlog.log" >> /var/spool/cron/root
-service crond reload
+crontab -l > <%= MONGO_DUMP_CRON_JOB %> &> /dev/null || true
+echo "00 00 * * * <%= MONGO_DUMP_BASH_SCRIPT %>" >> <%= MONGO_DUMP_CRON_JOB %>
+crontab <%= MONGO_DUMP_CRON_JOB %>
