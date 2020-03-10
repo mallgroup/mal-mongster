@@ -40,6 +40,7 @@ docker run -d --name <%= CONTAINER_NAME %>  \
     --replSet "<%= REPLICA_SET %>" &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
 
 <%- partial('./partials/mongo-backup').trim() %>
+<%- partial('./partials/mongo-restore').trim() %>
 <%- partial('./partials/cronjobs').trim() %>
 
 echo "<%= status.success(`ok`) %>"

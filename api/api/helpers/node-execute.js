@@ -93,6 +93,7 @@ module.exports = {
         DATA_BACKUP_DIR: `/data/backup`,
         BASH_SCRIPTS_DIR: `/data/scripts`,
         MONGO_DUMP_BASH_SCRIPT: `/data/scripts/mongodump.sh`,
+        MONGO_RESTORE_BASH_SCRIPT: `/data/scripts/mongorestore.sh`,
         AUTH_KEY_FILENAME: `.authkey`,
         AUTH_KEY_FILE_PATH: `/data/.authkey`,
         AUTH_KEY: cluster.authKey,
