@@ -19,5 +19,5 @@ while getopts \"d:\" arg; do
   esac
 done
 
-docker exec mall_mongo mongorestore --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --authenticationDatabase <%= AUTHENTICATION_DATABASE %> -d \${database} \$(pwd)/
+docker exec <%= CONTAINER_NAME %> mongorestore --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --authenticationDatabase <%= AUTHENTICATION_DATABASE %> -d \${database} \$(pwd)/
 " > "<%= MONGO_RESTORE_BASH_SCRIPT %>"

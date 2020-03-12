@@ -11,7 +11,7 @@ echo \"Exec mongodump... \"
 
 NOW=\$(date +%F-%H_%M)
 
-sudo docker exec \$(sudo docker ps -aqf \"name=mall_mongo\") mongodump --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --out <%= DATA_BACKUP_DIR %>/\${NOW}
+sudo docker exec \$(sudo docker ps -aqf \"name=<%= CONTAINER_NAME %>\") mongodump --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --out <%= DATA_BACKUP_DIR %>/\${NOW}
 
 echo \"Done mongodump.\"
 " > "<%= MONGO_DUMP_BASH_SCRIPT %>"
