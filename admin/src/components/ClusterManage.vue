@@ -7,7 +7,6 @@
       <div class="col">
         <q-input
           v-model="form.name"
-          :readonly="isEdit"
           :error="$v.form.name.$error"
           error-message="Check the name of your new cluster."
           label="Name *"
@@ -23,7 +22,6 @@
       <div class="col">
         <q-input
           v-model="form.ssh"
-          :readonly="isEdit"
           :error="$v.form.ssh.$error"
           error-message="Please enter your OpenSSH private key."
           type="textarea"
@@ -45,8 +43,8 @@
         v-if="form.user && form.password && form.authenticationDatabase && form.authKey"
         class="text-red"
       >
-        Credentials listed bellow has already been configured.<br>
-        It is really risky to update these values.
+        You already configured credentials listed bellow.
+        You can not update those values again.
       </p>
       <div class="row q-gutter-sm  q-mt-sm q-mb-md">
         <div class="col">
@@ -120,8 +118,15 @@
           class="q-mr-sm"
           @click="dialog.hide()"
         />
-        <q-btn v-if="!isEdit"
+        <q-btn
+          v-if="!isEdit"
           label="Add cluster"
+          color="primary"
+          @click="save()"
+        />
+        <q-btn
+          v-if="isEdit"
+          label="Update details"
           color="primary"
           @click="save()"
         />
@@ -223,10 +228,6 @@ export default {
   },
   methods: {
     async save () {
-      if (this.isEdit) {
-        return
-      }
-
       this.$v.form.$touch()
 
       if (this.$v.form.$error) {
