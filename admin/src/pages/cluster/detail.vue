@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col">
         <h2 class="text-h4 q-mt-none">
-          <q-icon name="developer_board" /> Cluster <em>{{ cluster ? cluster.name : `` }}</em>
+          <q-icon name="developer_board" /> Cluster - <em>{{ cluster ? cluster.name : `` }}</em>
         </h2>
       </div>
     </div>

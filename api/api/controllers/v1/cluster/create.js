@@ -40,7 +40,8 @@ module.exports = {
     inputs.ssh = strongCrypter.encrypt(inputs.ssh, key.value, 'hex')
     inputs.password = strongCrypter.encrypt(inputs.password, key.value, 'hex')
 
-    cluster = await Cluster.create(inputs).fetch()
+    cluster = await Cluster.create(inputs)
+      .fetch()
 
     return exits.success(
       JSend.success(cluster)

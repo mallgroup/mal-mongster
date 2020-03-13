@@ -6,10 +6,15 @@ fi
 <%- partial('./partials/node-cleanup').trim() %>
 
 mkdir -p "<%= DATA_DIR %>" &> /dev/null
+mkdir -p "<%= DATA_BACKUP_DIR %>" &> /dev/null
 touch "<%= AUTH_KEY_FILENAME %>" &> /dev/null
 echo "<%= AUTH_KEY %>" > "<%= AUTH_KEY_FILE_PATH %>"
 chmod 400 "<%= AUTH_KEY_FILE_PATH %>"
 chown 999:999 "<%= AUTH_KEY_FILE_PATH %>"
+
+<%- partial('./partials/mongo-backup').trim() %>
+<%- partial('./partials/mongo-restore').trim() %>
+<%- partial('./partials/cronjobs').trim() %>
 
 docker run -d --name <%= CONTAINER_NAME %>  \
     --network "host" \
@@ -33,6 +38,7 @@ docker run -d --name <%= CONTAINER_NAME %>  \
     -v <%= AUTH_KEY_FILE_PATH %>:<%= AUTH_KEY_FILE_PATH %> \
     -v <%= DATA_DIR %>/db:<%= DATA_DIR %>/db \
     -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
+    -v <%= DATA_BACKUP_DIR %>:<%= DATA_BACKUP_DIR %> \
     mongo:4.0.12-xenial \
     --keyFile "<%= AUTH_KEY_FILE_PATH %>" \
     --replSet "<%= REPLICA_SET %>" &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)

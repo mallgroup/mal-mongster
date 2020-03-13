@@ -1,7 +1,7 @@
 <template>
   <div class="q-ma-md">
     <h2 class="text-h4">
-      New cluster
+      {{ isEdit ? 'Cluster info' : 'New cluster' }}
     </h2>
     <div class="row">
       <div class="col">
@@ -12,7 +12,7 @@
           label="Name *"
           hint="Name for your cluster."
           autofocus
-          maxlength="11"
+          maxlength="20"
           @blur="$v.form.name.$touch"
           @keyup.enter="save()"
         />
@@ -43,13 +43,14 @@
         v-if="form.user && form.password && form.authenticationDatabase && form.authKey"
         class="text-red"
       >
-        Credentials listed bellow has already been configured.<br>
-        It is really risky to update these values.
+        You already configured credentials listed bellow.
+        You can not update those values again.
       </p>
       <div class="row q-gutter-sm  q-mt-sm q-mb-md">
         <div class="col">
           <q-input
             v-model="form.user"
+            :readonly="isEdit"
             :error="$v.form.user.$error"
             error-message="Check the root user name."
             label="User *"
@@ -61,6 +62,7 @@
         <div class="col">
           <q-input
             v-model="form.password"
+            :readonly="isEdit"
             :error="$v.form.password.$error"
             error-message="Check the root user's password."
             label="Password *"
@@ -83,6 +85,7 @@
         <div class="col">
           <q-input
             v-model="form.authenticationDatabase"
+            :readonly="isEdit"
             :error="$v.form.authenticationDatabase.$error"
             error-message="Check the authentication database option."
             label="Authentication Database *"
@@ -96,6 +99,7 @@
         <div class="col">
           <q-input
             v-model="form.authKey"
+            :readonly="isEdit"
             :error="$v.form.authKey.$error"
             error-message="Check the authentication key."
             label="Auth Key *"
@@ -115,7 +119,14 @@
           @click="dialog.hide()"
         />
         <q-btn
-          :label="`${form.id ? `Update` : `Add`} cluster`"
+          v-if="!isEdit"
+          label="Add cluster"
+          color="primary"
+          @click="save()"
+        />
+        <q-btn
+          v-if="isEdit"
+          label="Update details"
           color="primary"
           @click="save()"
         />
@@ -140,7 +151,7 @@
           <li>
             <strong>Backup</strong>
             <br>
-            There is no backup solution at all. So you should remember to protect your data yourself.
+            It uses tool mongodump, which saves data into folder <em>/data/backup</em> every day at 00:00
           </li>
         </ul>
       </div>
@@ -195,8 +206,13 @@ export default {
         user: '',
         password: '',
         authenticationDatabase: 'admin',
-        authKey: passwordGenerator(256, false)
+        authKey: passwordGenerator(256, false, '^[a-zA-Z0-9]')
       }
+    }
+  },
+  computed: {
+    isEdit () {
+      return this.form.id !== ''
     }
   },
   created () {

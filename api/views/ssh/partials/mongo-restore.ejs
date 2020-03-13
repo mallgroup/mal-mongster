@@ -1,0 +1,23 @@
+touch "<%= MONGO_RESTORE_BASH_SCRIPT %>" &> /dev/null
+chmod +x "<%= MONGO_RESTORE_BASH_SCRIPT %>"
+
+echo "#!/usr/bin/env bash
+
+if [ -z \"\$1\" ]
+ then
+  echo 'Usage: ./mongorestore.sh -d DATABASE_NAME'
+  exit 1
+ fi
+
+database=\"\"
+
+while getopts \"d:\" arg; do
+  case \$arg in
+    d)
+      database=\$OPTARG
+      ;;
+  esac
+done
+
+docker exec <%= CONTAINER_NAME %> mongorestore --username <%= MONGO_INITDB_ROOT_USERNAME %> --password <%= MONGO_INITDB_ROOT_PASSWORD %> --authenticationDatabase <%= AUTHENTICATION_DATABASE %> -d \${database} \$(pwd)/
+" > "<%= MONGO_RESTORE_BASH_SCRIPT %>"

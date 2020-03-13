@@ -81,8 +81,8 @@
               />
               <q-btn
                 color="secondary"
-                label="update"
-                icon="edit"
+                label="info"
+                icon="help"
                 dense
                 size="sm"
                 class="q-mr-sm"

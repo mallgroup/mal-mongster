@@ -13,7 +13,7 @@
     "sails-hook-orm": "^2.0.0-16",
     "sails-mongo": "^1.0.1",
     "ssh2": "^0.6.1",
-    "strong-cryptor": "^2.0.0"
+    "strong-cryptor": "2.0.*"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3",
