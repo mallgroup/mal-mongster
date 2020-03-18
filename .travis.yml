@@ -31,8 +31,7 @@ notifications:
 addons:
   sonarcloud:
     organization: "danielrataj-github"
-    token:
-      secure: "$SONAR_TOKEN"
+    token: "${SONAR_TOKEN}"
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3

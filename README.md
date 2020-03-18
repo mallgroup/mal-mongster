@@ -72,6 +72,10 @@ You also might be interested in local development. We'll appreciate any code tha
 
 -   [Local Development](/docs/development.md)
 
+### Testing
+
+-   [Read more about testing](/docs/testing.md)
+
 * * *
 
 ## FAQ

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  api:
+    container_name: api
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    command: npm test
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    environment:
+      NODE_ENV: development
+      MONGO_CONNECTION: mongodb:27017/mongster
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongo
+    image: bitnami/mongodb:4.1
+    ports:
+      - "27017:27017"
