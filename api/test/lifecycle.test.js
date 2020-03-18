@@ -15,13 +15,13 @@ before(function (done) {
     hooks: { grunt: false },
     log: { level: 'warn' }
 
-  }, (err) => {
+  }, (err, sails) => {
     if (err) { return done(err) }
 
     // here you can load fixtures, etc.
     // (for example, you might want to create some records in the database)
 
-    return done()
+    return done(err, sails)
   })
 })
 
