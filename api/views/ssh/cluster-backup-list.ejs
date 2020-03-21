@@ -1,0 +1,7 @@
+RESULT=$(ls -F "<%= DATA_BACKUP_DIR %>" | grep /) &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_BACKUP_LIST.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`$RESULT`) %>"

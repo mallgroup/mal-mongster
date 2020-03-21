@@ -33,6 +33,12 @@
           label="Database"
           icon="menu"
         />
+        <q-tab
+          v-if="isConfigurable"
+          name="backup"
+          label="Backup"
+          icon="storage"
+        />
       </q-tabs>
 
       <q-tab-panels
@@ -77,6 +83,12 @@
             @onSave="fetchData(true)"
           />
         </q-tab-panel>
+        <q-tab-panel
+          v-if="hasPrimaryNode"
+          name="backup"
+        >
+          <database-backup />
+        </q-tab-panel>
       </q-tab-panels>
     </template>
 
@@ -92,6 +104,7 @@
 <script>
 import DatabaseList from '../../components/DatabaseList'
 import ClusterNodeManage from '../../components/ClusterNodeManage'
+import DatabaseBackup from '../../components/DatabaseBackup'
 import NodeList from '../../components/NodeList'
 
 export default {
@@ -99,7 +112,8 @@ export default {
   components: {
     DatabaseList,
     ClusterNodeManage,
-    NodeList
+    NodeList,
+    DatabaseBackup
   },
   data () {
     return {

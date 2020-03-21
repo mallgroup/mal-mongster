@@ -49,5 +49,14 @@ module.exports.errors = {
   },
   NODE_RESTART_DOCKER: {
     message: `It is not possible to restart a Docker instance.`
+  },
+  CLUSTER_BACKUP_LIST: {
+    message: `It is not possible to retrieve a list of backups from cluster.`
+  },
+  CLUSTER_BACKUP: {
+    message: `It is not possible to backup a cluster.`
+  },
+  CLUSTER_TAR: {
+    message: `It is not possible to archive the folder.`
   }
 }
