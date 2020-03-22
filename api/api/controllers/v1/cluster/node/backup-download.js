@@ -51,7 +51,7 @@ module.exports = {
       return exits.noPrimaryFound()
     }
 
-    // result should be the path to the backup to the TAR file we're able to download later
+    // first create a tar file
     let result = await sails.helpers.nodeExecute(
       primaryHost.cluster,
       primaryHost.hostname,
@@ -63,32 +63,37 @@ module.exports = {
       }
     )
 
-    if (!result) {
-      // let's assume we don't have any records here
-      return exits.sshExecutionFailed()
-    }
-
     if (result.split(`:`)[0] === `error`) {
       sails.log.error(result.split(`:`)[1])
-      // let's assume we don't have any records here
       return exits.sshExecutionFailed()
     }
 
-    // just make sure we have a "success" status from node
     if (result.split(`:`)[0] !== `success`) {
       return exits.sshExecutionFailed()
     }
 
+    const filename = result.split(':')[1]
+    const remotePath = `${sails.config.server.output.dir}/${filename}`
+    const localPath = `${sails.config.paths.public}/${filename}`
+
+    // result should be the path to the backup to the TAR file we're able to download later
+    let transferResult = await sails.helpers.nodeTransfer(
+      cluster,
+      primaryHost,
+      remotePath, // do not forget to append ".tar.gz"
+      localPath
+    )
+
+    if (!transferResult) {
+      // let's assume we don't have any records here
+      return exits.sshExecutionFailed()
+    }
+
     // download file
-    const filename = result.split(`:`)[1]
-    let filepath = `/data/output/${filename}`
-
-    let file = path.resolve(filepath)
-
-    if (fs.existsSync(file)) {
+    if (fs.existsSync(localPath)) {
       this.res.setHeader('Content-disposition', 'attachment; filename=' + filename)
 
-      let filestream = fs.createReadStream(file)
+      let filestream = fs.createReadStream(localPath)
       filestream.pipe(this.res)
     } else {
       return exits.fileNotFound()
