@@ -75,7 +75,7 @@ describe('Node', () => {
   })
 
   it('download a backup', (done) => {
-    const backupdir = '2020-12-31'¨
+    const backupdir = '2020-12-31'
 
     // node not found
     supertest(sails.hooks.http.app)

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <q-banner class="bg-secondary text-white q-mt-sm q-mb-lg">
-          Please note that all items here are taken from <b>primary</b> server.
+          Please note that all items here are taken from <strong>primary</strong> server.
           Mongo is not able to create a backup from other than primary node.
         </q-banner>
       </div>
