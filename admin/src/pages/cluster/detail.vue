@@ -204,7 +204,7 @@ export default {
           this.cluster = result.data.data
           this.updateInfo(this.cluster.nodes)
         } catch (err) {
-          console.error(err)
+          process.env.NODE_ENV === 'development' && console.error(err)
         }
       })
 
@@ -225,7 +225,7 @@ export default {
           try {
             this.$store.commit('node/add', result.data.data)
           } catch (e) {
-            console.error(e)
+            process.env.NODE_ENV === 'development' && console.error(e)
           }
         })
       })
@@ -265,8 +265,9 @@ export default {
 
         promise.catch((response) => {
           this.$notify.negative('It is not possible to remove the node from the cluster. Please try it again.')
-          console.error(response)
           this.$q.loading.hide()
+
+          process.env.NODE_ENV === 'development' && console.error(response)
         })
       })
     },
@@ -298,7 +299,7 @@ export default {
 
         promise.catch((response) => {
           this.$notify.negative('It is not possible to restart a Docker container on the node. Please try it again.')
-          console.error(response)
+          process.env.NODE_ENV === 'development' && console.error(response)
         })
 
         promise.finally(() => this.$q.loading.hide())

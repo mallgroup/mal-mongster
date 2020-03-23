@@ -196,7 +196,7 @@ export default {
 
       promise.catch((err) => {
         this.loading.items = false
-        console.error(err)
+        process.env.NODE_ENV === 'development' && console.error(err)
       })
 
       promise.finally(() => this.$q.loading.hide())
@@ -234,7 +234,7 @@ export default {
         promise.catch(({ response }) => {
           this.$q.loading.hide()
 
-          console.error(response)
+          process.env.NODE_ENV === 'development' && console.error(response)
 
           if (response.status === 400) {
             // node has some clusters

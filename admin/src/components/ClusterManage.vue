@@ -259,7 +259,7 @@ export default {
         }
 
         this.$notify.negative('It is not possible to add a new cluster. Please try it again.')
-        console.error(response)
+        process.env.NODE_ENV === 'development' && console.error(response)
       })
     }
   }

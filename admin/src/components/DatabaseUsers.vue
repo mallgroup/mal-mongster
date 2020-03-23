@@ -183,7 +183,7 @@ export default {
         }
       } catch (err) {
         if (err) {
-          console.error(err)
+          process.env.NODE_ENV === 'development' && console.error(err)
         }
       }
 
@@ -204,7 +204,7 @@ export default {
       })
 
       promise.catch((err) => {
-        console.error(err)
+        process.env.NODE_ENV === 'development' && console.error(err)
       })
 
       promise.finally(() => this.$nextTick(() => {
@@ -238,7 +238,7 @@ export default {
         })
 
         promise.catch((err) => {
-          console.error(err)
+          process.env.NODE_ENV === 'development' && console.error(err)
 
           this.$notify.negative('It is not possible the user from the database. Please try it again.')
         })

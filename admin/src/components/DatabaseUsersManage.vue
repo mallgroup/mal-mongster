@@ -137,7 +137,7 @@ export default {
         }
 
         this.$notify.negative('It is not possible to add a new user. Please try it again.')
-        console.error(response)
+        process.env.NODE_ENV === 'development' && console.error(response)
       })
 
       promise.finally(() => this.$nextTick(() => this.$q.loading.hide()))

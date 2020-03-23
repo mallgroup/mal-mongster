@@ -152,7 +152,7 @@ export default {
       })
 
       promise.catch((err) => {
-        console.error(err)
+        process.env.NODE_ENV === 'development' && console.error(err)
       })
 
       promise.finally(() => this.$nextTick(() => {
@@ -188,7 +188,7 @@ export default {
         })
 
         promise.catch(({ response }) => {
-          console.error(response)
+          process.env.NODE_ENV === 'development' && console.error(response)
 
           this.$notify.negative('It is not possible to remove the database. Please try it again.')
         })

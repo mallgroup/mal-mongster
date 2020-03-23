@@ -109,7 +109,7 @@ export default {
         }
       } catch (error) {
         if (error) {
-          console.error(error)
+          process.env.NODE_ENV === 'development' && console.error(error)
         }
       } finally {
         this.loading.items = false
@@ -139,7 +139,7 @@ export default {
           this.$notify.positive(`Cluster successfully backed up.`)
         } catch (error) {
           if (error) {
-            console.error(error)
+            process.env.NODE_ENV === 'development' && console.error(error)
           }
         } finally {
           this.loading.generate = false
@@ -168,7 +168,7 @@ export default {
             window.location = `${baseUrl}/v1/cluster/node/${this.$route.params.id}/backup/download/${directory}`
           } catch (error) {
             if (error) {
-              console.error(error)
+              process.env.NODE_ENV === 'development' && console.error(error)
             }
           } finally {
             this.loading.items = false
