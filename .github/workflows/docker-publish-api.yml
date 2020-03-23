@@ -10,7 +10,7 @@ on:
     tags:
       - v*
 env:
-  IMAGE_NAME: mall-mongster-api
+  IMAGE_NAME: api
 
 jobs:
 
