@@ -1,0 +1,25 @@
+DATA_BACKUP_DIR="<%= DATA_BACKUP_DIR %>"
+BACKUP_SCRIPT="<%= MONGO_DUMP_BASH_SCRIPT %>"
+
+NOW=$(date +%F-%H_%M)
+
+# do the backup first inside the container within /dump directory
+sudo docker exec <%= CONTAINER_NAME %> \
+  mongodump --username <%= MONGO_INITDB_ROOT_USERNAME %> \
+  --password <%= MONGO_INITDB_ROOT_PASSWORD %>
+&> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_BACKUP.message) %>" && exit 1
+fi
+
+# now copy the content of the Docker container right to the host folder
+sudo docker cp <%= CONTAINER_NAME %>:dump/ "$DATA_BACKUP_DIR"/"$NOW" &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_BACKUP.message) %>" && exit 1
+fi
+
+DIRS=$(<%- partial('./cluster-backup-list').trim() -%>)
+
+echo "<%= status.success(`$DIRS`) %>"

@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 /**
  * Bootstrap
  * (sails.config.bootstrap)
@@ -27,6 +29,14 @@ module.exports.bootstrap = async function (done) {
   // ```
 
   await sails.helpers.generateSecurityKey()
+
+  // create a temporary folder if not exists
+
+  if (!fs.existsSync(sails.config.paths.public)) {
+    fs.mkdirSync(sails.config.paths.public, {
+      recursive: true
+    })
+  }
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -22,7 +22,10 @@ We believe that security is essential.
 
 ## Prerequisities
 
-You need GIT and [Docker](https://www.docker.com/) installed on your computer, both up to date.
+You need
+ * GIT (to be able to download this repository),
+ * TAR (for backups on the node),
+ * [Docker](https://www.docker.com/) to run all required images.
 
 ## Clone repository
 Clone the master branch.

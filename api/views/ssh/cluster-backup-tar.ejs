@@ -1,0 +1,22 @@
+DATA_BACKUP_DIR="<%= DATA_BACKUP_DIR %>"
+DIRECTORY_TO_BACKUP="$DATA_BACKUP_DIR/<%= BACKUP_DIRECTORY %>"
+DATA_OUTPUT_DIR="<%= DATA_OUTPUT_DIR %>"
+BACKUP_FILENAME="<%= BACKUP_DIRECTORY %>.tar.gz"
+OUTPUT_BACKUP_FILE="$DATA_OUTPUT_DIR/$BACKUP_FILENAME"
+
+# make sure the output directory exists
+mkdir -p "$DATA_OUTPUT_DIR"
+
+echo "$?" &> /dev/null
+
+if [ "$?" = 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_TAR.message) %>" && exit 1
+fi
+
+tar -czvf "$OUTPUT_BACKUP_FILE" "$DIRECTORY_TO_BACKUP" &> /dev/null
+
+if [ "$?" = 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_TAR.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`$BACKUP_FILENAME`) %>"
