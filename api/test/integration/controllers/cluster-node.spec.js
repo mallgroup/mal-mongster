@@ -39,6 +39,50 @@ describe('Node', () => {
       .expect(409, done)
   })
 
+  it('list backups on non existing cluster', (done) => {
+    const randomclusterid = 'hjkhghsj78bnsc'
+    supertest(sails.hooks.http.app)
+      .get(`/v1/cluster/node/${randomclusterid}/backup`)
+      .expect(404, done)
+  })
+
+  it('list backups', (done) => {
+    supertest(sails.hooks.http.app)
+      .post(`/v1/cluster/node/${node.cluster}/backup`)
+      .expect(500, done)
+  })
+
+  it('generate a backup on non existing cluster', (done) => {
+    const randomclusterid = 'hjkhghsj78bnsc'
+    supertest(sails.hooks.http.app)
+      .get(`/v1/cluster/node/${randomclusterid}/backup`)
+      .expect(404, done)
+  })
+
+  it('generate a backup', (done) => {
+    supertest(sails.hooks.http.app)
+      .post(`/v1/cluster/node/${node.cluster}/backup`)
+      .expect(500, done)
+  })
+
+  it('download a backup on non existing cluster', (done) => {
+    const randomclusterid = 'hjkhghsj78bnsc'
+    const backupdir = '2020-12-31'
+
+    supertest(sails.hooks.http.app)
+      .get(`/v1/cluster/node/${randomclusterid}/backup/download/${backupdir}`)
+      .expect(404, done)
+  })
+
+  it('download a backup', (done) => {
+    const backupdir = '2020-12-31'¨
+
+    // node not found
+    supertest(sails.hooks.http.app)
+      .post(`/v1/cluster/node/${node.cluster}/backup/download/${backupdir}`)
+      .expect(404, done)
+  })
+
   it('delete a node', (done) => {
     supertest(sails.hooks.http.app)
       .delete(`/v1/cluster/node/${node.id}`)

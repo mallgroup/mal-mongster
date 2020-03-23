@@ -35,6 +35,10 @@ module.exports = {
       return exits.clusterNotFound()
     }
 
+    if (!cluster.nodes.length) {
+      return exits.clusterNotFound()
+    }
+
     // find primary server in list of nodes
     let primaryHost = await sails.helpers.nodeFindPrimary(cluster.nodes)
 
