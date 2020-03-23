@@ -258,7 +258,9 @@ export default {
         }
 
         this.$notify.negative('It is not possible to connect to the node. Please try it again.')
-        process.env.NODE_ENV === 'development' && console.error(response)
+
+        // eslint-disable-next-line no-console
+        console.error(response)
       })
     },
 
@@ -298,7 +300,9 @@ export default {
         }
 
         this.$notify.negative(response.data.message || 'It is not possible to install required software on the server. Please try it again.')
-        process.env.NODE_ENV === 'development' && console.error(response)
+
+        // eslint-disable-next-line no-console
+        console.error(response)
       })
 
       promise.finally(() => {
@@ -341,7 +345,9 @@ export default {
         }
 
         this.$notify.negative('It is not possible to add a new node to the cluster. Please try it again.')
-        process.env.NODE_ENV === 'development' && console.error(response)
+
+        // eslint-disable-next-line no-console
+        console.error(response)
       })
     },
 

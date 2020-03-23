@@ -273,7 +273,9 @@ export default {
 
         promise.catch((response) => {
           this.$notify.negative('It is not possible to change the vote on the node. Please try it again.')
-          process.env.NODE_ENV === 'development' && console.error(response)
+
+          // eslint-disable-next-line no-console
+          console.error(response)
         })
 
         promise.finally(() => this.$q.loading.hide())
@@ -316,7 +318,9 @@ export default {
 
         promise.catch((response) => {
           this.$notify.negative('It is not possible to change the priority on the node. Please try it again.')
-          process.env.NODE_ENV === 'development' && console.error(response)
+
+          // eslint-disable-next-line no-console
+          console.error(response)
         })
 
         promise.finally(() => this.$q.loading.hide())

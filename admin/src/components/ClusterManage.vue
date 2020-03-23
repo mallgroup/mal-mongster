@@ -259,7 +259,9 @@ export default {
         }
 
         this.$notify.negative('It is not possible to add a new cluster. Please try it again.')
-        process.env.NODE_ENV === 'development' && console.error(response)
+
+        // eslint-disable-next-line no-console
+        console.error(response)
       })
     }
   }

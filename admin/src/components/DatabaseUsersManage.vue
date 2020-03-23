@@ -137,7 +137,9 @@ export default {
         }
 
         this.$notify.negative('It is not possible to add a new user. Please try it again.')
-        process.env.NODE_ENV === 'development' && console.error(response)
+
+        // eslint-disable-next-line no-console
+        console.error(response)
       })
 
       promise.finally(() => this.$nextTick(() => this.$q.loading.hide()))

@@ -183,7 +183,8 @@ export default {
         }
       } catch (err) {
         if (err) {
-          process.env.NODE_ENV === 'development' && console.error(err)
+          // eslint-disable-next-line no-console
+          console.error(err)
         }
       }
 
@@ -204,7 +205,8 @@ export default {
       })
 
       promise.catch((err) => {
-        process.env.NODE_ENV === 'development' && console.error(err)
+        // eslint-disable-next-line no-console
+        console.error(err)
       })
 
       promise.finally(() => this.$nextTick(() => {
@@ -238,7 +240,8 @@ export default {
         })
 
         promise.catch((err) => {
-          process.env.NODE_ENV === 'development' && console.error(err)
+          // eslint-disable-next-line no-console
+          console.error(err)
 
           this.$notify.negative('It is not possible the user from the database. Please try it again.')
         })

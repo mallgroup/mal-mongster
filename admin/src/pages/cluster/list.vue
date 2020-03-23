@@ -196,7 +196,9 @@ export default {
 
       promise.catch((err) => {
         this.loading.items = false
-        process.env.NODE_ENV === 'development' && console.error(err)
+
+        // eslint-disable-next-line no-console
+        console.error(err)
       })
 
       promise.finally(() => this.$q.loading.hide())
@@ -234,7 +236,8 @@ export default {
         promise.catch(({ response }) => {
           this.$q.loading.hide()
 
-          process.env.NODE_ENV === 'development' && console.error(response)
+          // eslint-disable-next-line no-console
+          console.error(response)
 
           if (response.status === 400) {
             // node has some clusters

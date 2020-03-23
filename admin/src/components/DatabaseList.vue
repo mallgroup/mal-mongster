@@ -152,7 +152,8 @@ export default {
       })
 
       promise.catch((err) => {
-        process.env.NODE_ENV === 'development' && console.error(err)
+        // eslint-disable-next-line no-console
+        console.error(err)
       })
 
       promise.finally(() => this.$nextTick(() => {
@@ -188,7 +189,8 @@ export default {
         })
 
         promise.catch(({ response }) => {
-          process.env.NODE_ENV === 'development' && console.error(response)
+          // eslint-disable-next-line no-console
+          console.error(response)
 
           this.$notify.negative('It is not possible to remove the database. Please try it again.')
         })
