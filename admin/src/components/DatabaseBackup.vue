@@ -29,8 +29,12 @@
 
         <small-loading :visible="loading.items" />
 
+        <p v-if="!loading.items && !dirs.length">
+          There are no backups yet.
+        </p>
+
         <q-list
-          v-if="dirs.length"
+          v-if="!loading.items && dirs.length"
           bordered
           padding
           class="rounded-borders"
@@ -149,19 +153,28 @@ export default {
     },
 
     download (directory) {
-      this.$notify.positive(`Please wait until the backup is ready to download.`)
-
-      setTimeout(() => {
-        try {
-          window.location = `${baseUrl}/v1/cluster/node/${this.$route.params.id}/backup/download/${directory}`
-        } catch (error) {
-          if (error) {
-            console.error(error)
+      this.$q.dialog({
+        color: 'red',
+        title: 'Download backup',
+        html: true,
+        message: `Are you sure you want to download the backup <i>${directory}</i>?
+        <br />
+        It might take a while based on the size of your database.`,
+        ok: 'Download',
+        cancel: 'Cancel'
+      }).onOk(async () => {
+        setTimeout(() => {
+          try {
+            window.location = `${baseUrl}/v1/cluster/node/${this.$route.params.id}/backup/download/${directory}`
+          } catch (error) {
+            if (error) {
+              console.error(error)
+            }
+          } finally {
+            this.loading.items = false
           }
-        } finally {
-          this.loading.items = false
-        }
-      }, 2000)
+        }, 2000)
+      })
     }
   }
 }
