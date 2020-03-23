@@ -26,18 +26,24 @@ You need
  * GIT (to be able to download this repository),
  * TAR (for backups on the node),
  * [Docker](https://www.docker.com/) to run all required images.
+ * [Docker Compose](https://docs.docker.com/compose/) to run all containers at once.
 
-## Clone repository
-Clone the master branch.
+## Docker containers with Docker Compose
+
+We released official Docker images right at GitHub (known as Packages).
+First you need a personal access token to be able to download images from GitHub (GitHub does not allow a free access to the Packages yet). Then you have to login:
 
 ```sh
-git clone git@github.com:mallgroup/mal-mongster.git
-cd mal-mongster
+docker login docker.pkg.github.com -u YOUR_USERNAME -p PERSONAL_ACCESS_TOKEN
 ```
 
-## Run Docker Compose
+Now you can run Docker Compose for 3 containers (api, administration and Mongo DB) at once:
 
-Run all Docker containers on the background at once.
+```sh
+docker-compose down && docker-compose up
+```
+
+Or on the background:
 
 ```sh
 docker-compose down && docker-compose up -d

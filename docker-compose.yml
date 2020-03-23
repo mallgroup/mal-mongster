@@ -6,11 +6,9 @@ services:
     container_name: api
     ports:
       - "1337:1337"
-    build:
-      context: .
-      dockerfile: Dockerfile-api
+    image: docker.pkg.github.com/mallgroup/mal-mongster/api:latest
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       CONFIG_CORS_ALLOW_ORIGINS: '*'
       MONGO_CONNECTION: mongodb:27017/mongster
     links:
@@ -22,9 +20,7 @@ services:
     container_name: admin
     ports:
       - "8080:80"
-    build:
-      context: .
-      dockerfile: Dockerfile-admin
+    image: docker.pkg.github.com/mallgroup/mal-mongster/admin:latest
     depends_on:
       - api
 
