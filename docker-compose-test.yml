@@ -20,6 +20,6 @@ services:
 
   mongodb:
     container_name: mongo
-    image: bitnami/mongodb:4.1
+    image: bitnami/mongodb:4.4.6
     ports:
       - "27017:27017"

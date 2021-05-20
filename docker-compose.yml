@@ -6,7 +6,7 @@ services:
     container_name: api
     ports:
       - "1337:1337"
-    image: docker.pkg.github.com/mallgroup/mal-mongster/api:latest
+    image: docker pull ghcr.io/mallgroup/mal-mongster/api:4.4
     environment:
       NODE_ENV: production
       CONFIG_CORS_ALLOW_ORIGINS: '*'
@@ -20,13 +20,13 @@ services:
     container_name: admin
     ports:
       - "8080:80"
-    image: docker.pkg.github.com/mallgroup/mal-mongster/admin:latest
+    image: docker pull ghcr.io/mallgroup/mal-mongster/admin:4.4
     depends_on:
       - api
 
   mongodb:
     container_name: mongo
-    image: bitnami/mongodb:4.1
+    image: bitnami/mongodb:4.4.6
     ports:
       - "27017:27017"
     volumes:
