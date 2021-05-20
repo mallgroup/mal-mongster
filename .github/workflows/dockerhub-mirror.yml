@@ -1,0 +1,27 @@
+name: dockerhub-mirror
+
+on: workflow_dispatch
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Mongo
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}/mongo
+          VERSION=4.4.6-bionic
+          PULL_IMAGE=mongo:$VERSION
+
+          docker pull "$PULL_IMAGE"
+
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+
+          docker tag "$PULL_IMAGE" "${IMAGE_ID}:${VERSION}"
+          docker push "${IMAGE_ID}:${VERSION}"
