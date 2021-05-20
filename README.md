@@ -1,5 +1,4 @@
 [![Build Status](https://api.travis-ci.org/mallgroup/mal-mongster.svg?branch=master)](https://travis-ci.org/mallgroup/mal-mongster)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=danielrataj_mal-mongster&metric=alert_status)](https://sonarcloud.io/dashboard?id=danielrataj_mal-mongster)
 
 <img src="/admin/src/assets/logo-512x512.png" alt="logo" width="150" height="150" align="right"
  />
