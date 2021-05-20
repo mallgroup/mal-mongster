@@ -22,21 +22,15 @@ We believe that security is essential.
 ## Prerequisities
 
 You need
- * GIT (to be able to download this repository),
- * TAR (for backups on the node),
- * [Docker](https://www.docker.com/) to run all required images.
- * [Docker Compose](https://docs.docker.com/compose/) to run all containers at once.
+
+-   GIT (to be able to download this repository),
+-   TAR (for backups on the node),
+-   [Docker](https://www.docker.com/) to run all required images.
+-   [Docker Compose](https://docs.docker.com/compose/) to run all containers at once.
 
 ## Docker containers with Docker Compose
 
-We released official Docker images right at GitHub (known as Packages).
-First you need a personal access token to be able to download images from GitHub (GitHub does not allow a free access to the Packages yet). Then you have to login:
-
-```sh
-docker login docker.pkg.github.com -u YOUR_USERNAME -p PERSONAL_ACCESS_TOKEN
-```
-
-Now you can run Docker Compose for 3 containers (api, administration and Mongo DB) at once:
+Run containers with Docker Compose:
 
 ```sh
 docker-compose down && docker-compose up
