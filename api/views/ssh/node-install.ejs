@@ -23,7 +23,7 @@ docker run -d --name <%= CONTAINER_NAME %>  \
     -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
     -e MONGO_INITDB_ROOT_USERNAME=<%= MONGO_INITDB_ROOT_USERNAME %> \
     -e MONGO_INITDB_ROOT_PASSWORD=<%= MONGO_INITDB_ROOT_PASSWORD %> \
-    mongo:4.0.12-xenial &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
+    mongo:4.4.6-bionic &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
 
 docker cp <%= AUTH_KEY_FILE_PATH %> <%= CONTAINER_NAME %>:/<%= AUTH_KEY_FILE_PATH %> &> /dev/null
 sleep 1
@@ -39,7 +39,7 @@ docker run -d --name <%= CONTAINER_NAME %>  \
     -v <%= DATA_DIR %>/db:<%= DATA_DIR %>/db \
     -v <%= DATA_DIR %>/configdb:<%= DATA_DIR %>/configdb \
     -v <%= DATA_BACKUP_DIR %>:<%= DATA_BACKUP_DIR %> \
-    mongo:4.0.12-xenial \
+    mongo:4.4.6-bionic \
     --keyFile "<%= AUTH_KEY_FILE_PATH %>" \
     --replSet "<%= REPLICA_SET %>" &> /dev/null || (echo "<%= status.error(errors.DOCKER_RUN_ERROR.message) %>" && exit 1)
 
