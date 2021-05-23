@@ -45,10 +45,10 @@ docker-compose down && docker-compose -p mal-mongster up
 Or on the background:
 
 ```sh
-docker-compose down && docker-compose up -d
+docker-compose down && docker-compose -p mal-mongster up -d
 ```
 
-Admin panel appears on URL <http://localhost:8080>
+Admin panel appears on URL <http://localhost:8080>. It might take a minute or two.
 
 ### Database
 
