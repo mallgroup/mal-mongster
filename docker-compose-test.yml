@@ -20,6 +20,6 @@ services:
 
   mongodb:
     container_name: mongo
-    image: bitnami/mongodb:4.4.6
+    image: ghcr.io/mallgroup/mal-mongster/mongo:4.4.6-bionic
     ports:
       - "27017:27017"

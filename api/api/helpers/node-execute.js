@@ -89,6 +89,7 @@ module.exports = {
       cmd = await sails.renderView(cmd, {
         layout: false,
         CONTAINER_NAME: `mall_mongo`,
+        MONGO_IMAGE: 'ghcr.io/mallgroup/mal-mongster/mongo:4.4.6-bionic',
         DATA_DIR: sails.config.server.datadir,
         DATA_BACKUP_DIR: sails.config.server.backup.dir,
         DATA_OUTPUT_DIR: sails.config.server.output.dir,

@@ -55,7 +55,7 @@ RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
         }
     }
 
-    status
+    JSON.parse(JSON.stringify(status))
 
 ") &> /dev/null
 

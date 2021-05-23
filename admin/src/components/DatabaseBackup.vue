@@ -124,7 +124,9 @@ export default {
         html: true,
         message: `Are you sure you want to generate a new backup?
         <br />
-        It might take a while based on the size of your database.`,
+        It might take a while based on the size of your database.
+        <br />
+        Also it consumes some memory on the primary node.`,
         ok: 'Backup',
         cancel: 'Cancel'
       }).onOk(async () => {
@@ -161,7 +163,7 @@ export default {
         html: true,
         message: `Are you sure you want to download the backup <i>${directory}</i>?
         <br />
-        It might take a while based on the size of your database.`,
+        It might take a while to archive all database files.`,
         ok: 'Download',
         cancel: 'Cancel'
       }).onOk(async () => {

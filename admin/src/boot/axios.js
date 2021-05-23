@@ -5,7 +5,7 @@ export const baseUrl = `${window.location.protocol}//${window.location.hostname}
 export default ({ Vue }) => {
   let client = axios.create({
     baseURL: baseUrl,
-    timeout: 30000
+    timeout: 50000
   })
 
   Vue.prototype.$axios = client

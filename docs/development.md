@@ -68,3 +68,11 @@ volumes:
 ```
 
 You can replace `./my_local_db_folder` with the directory you expect the Mongo will store the data.
+
+## Admin - Generate favicons
+
+Run in /admin directory (don't forget to install icongenie package globally first):
+
+```sh
+icongenie generate -i public/logo/logo-512x512.png --skip-trim -m spa
+```

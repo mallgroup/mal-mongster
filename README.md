@@ -30,10 +30,16 @@ You need
 
 ## Docker containers with Docker Compose
 
+Create a private network first:
+
+```bash
+docker network create -d bridge mal-mongster-tier
+```
+
 Run containers with Docker Compose:
 
 ```sh
-docker-compose down && docker-compose up
+docker-compose down && docker-compose -p mal-mongster up
 ```
 
 Or on the background:
