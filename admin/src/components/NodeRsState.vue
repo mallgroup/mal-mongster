@@ -79,7 +79,8 @@
         class="text-red"
       >
         <q-tooltip>
-          Your node is a part of replica. But not the part of the clustering because of 0 votes.
+          Your node is a part of a replica (you can read from it).
+          But it is not eligible to vote in case of failure (split brain).
         </q-tooltip>
       </q-icon>
     </p>

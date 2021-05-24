@@ -97,6 +97,7 @@
                 @click="clusterDialog(props.row)"
               />
               <q-btn
+                v-if="!props.row.nodes.length"
                 color="primary"
                 label="delete"
                 icon="clear"
