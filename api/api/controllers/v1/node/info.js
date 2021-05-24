@@ -1,5 +1,4 @@
 const JSend = require('jsend')
-const fs = require('fs')
 
 module.exports = {
 
