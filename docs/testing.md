@@ -1,6 +1,6 @@
 # Testing - API
 
-You can run Docker container (Mongo DB and API) to rerun unit tests the API:
+You can run Docker container (Mongo DB and API) to run unit tests:
 
 ```bash
 docker-compose down && docker-compose -f docker-compose-test.yml up
