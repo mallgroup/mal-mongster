@@ -67,47 +67,43 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              key="options"
-              :props="props"
-            >
-              <q-btn
-                color="accent"
-                icon="search"
-                dense
-                label="detail"
-                size="sm"
-                class="q-mr-sm"
-                @click="goToDetail(props.row)"
-              />
-              <q-btn
-                color="secondary"
-                label="info"
-                icon="help"
-                dense
-                size="sm"
-                class="q-mr-sm"
-                @click="clusterDialog(props.row)"
-              />
-              <q-btn
-                color="primary"
-                label="delete"
-                icon="clear"
-                dense
-                size="sm"
-                @click="destroy(props.row, props.row.__index)"
-              />
-            </q-td>
-            <q-td
               key="name"
               :props="props"
             >
-              {{ props.row.name }}
+              <router-link :to="{
+                name: 'cluster.detail',
+                params: {
+                  id: props.row.id
+                }
+              }">
+                {{ props.row.name }}
+              </router-link>
             </q-td>
             <q-td
               key="nodes"
               :props="props"
               v-html="nodesWithLineBreak(props.row.nodes)"
             />
+            <q-td
+              key="options"
+              :props="props"
+            >
+              <q-btn
+                color="secondary"
+                label="edit"
+                icon="edit"
+                class="q-mr-sm"
+                size="sm"
+                @click="clusterDialog(props.row)"
+              />
+              <q-btn
+                color="primary"
+                label="delete"
+                icon="clear"
+                size="sm"
+                @click="destroy(props.row, props.row.__index)"
+              />
+            </q-td>
           </q-tr>
         </template>
       </q-table>
@@ -140,11 +136,6 @@ export default {
       activeCluster: null,
       columns: [
         {
-          name: `options`,
-          label: `Options`,
-          align: `left`
-        },
-        {
           name: `name`,
           label: `Name`,
           field: `name`,
@@ -154,6 +145,11 @@ export default {
           name: `nodes`,
           label: `Nodes`,
           field: `nodes`,
+          align: `left`
+        },
+        {
+          name: `options`,
+          label: `Options`,
           align: `left`
         }
       ]

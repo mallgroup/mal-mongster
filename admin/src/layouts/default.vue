@@ -1,10 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header>
-      <q-toolbar
-        :inverted="$q.theme === 'ios'"
-        color="primary"
-      >
+    <q-header elevated>
+      <q-toolbar>
         <q-btn
           flat
           dense
@@ -23,16 +20,15 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
+      show-if-above
+      bordered
+      content-class="bg-grey-1"
     >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-      >
+      <q-list>
         <q-item
-          :to="{ name: 'home' }"
+          clickable
           exact
+          :to="{ name: 'home' }"
         >
           <q-item-section avatar>
             <q-icon name="home" />
@@ -42,6 +38,8 @@
           </q-item-section>
         </q-item>
         <q-item
+          clickable
+          exact
           :to="{ name: 'cluster.list' }"
         >
           <q-item-section avatar>
