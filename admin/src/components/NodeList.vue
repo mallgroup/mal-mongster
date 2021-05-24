@@ -125,7 +125,7 @@
         >
           <q-card class="q-pa-md">
             <h2 class="text-h4 q-ma-none q-mb-sm">
-              Add a new database
+              Connection string
             </h2>
             <p>{{ buildConnectionString() }}</p>
             <p><em>Note: Connection string does not include arbiter node.</em></p>
@@ -211,7 +211,7 @@ export default {
         url += nodes.join(`,`)
       }
 
-      url += `?replicaSet=rs0`
+      url += `/admin?replicaSet=rs0`
 
       return url
     },

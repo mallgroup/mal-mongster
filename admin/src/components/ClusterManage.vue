@@ -37,10 +37,10 @@
     </div>
 
     <div
-      :class="{ 'shadow-1 q-pa-md' : form.user && form.password && form.authenticationDatabase && form.authKey }"
+      :class="{ 'shadow-1 q-pa-md' : form.id.length && form.user && form.password && form.authenticationDatabase && form.authKey }"
     >
       <p
-        v-if="form.user && form.password && form.authenticationDatabase && form.authKey"
+        v-if="form.id.length && form.user && form.password && form.authenticationDatabase && form.authKey"
         class="text-red"
       >
         You already configured credentials listed bellow.
@@ -83,16 +83,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <q-input
-            v-model="form.authenticationDatabase"
-            readonly
-            :error="$v.form.authenticationDatabase.$error"
-            error-message="Check the authentication database option."
-            label="Authentication Database"
-            hint="Admin DB that holds authentication. It is 'admin' by default."
-            @blur="$v.form.authenticationDatabase.$touch"
-            @keyup.enter="save()"
-          />
+          Authentication Database: <i>admin</i>
         </div>
       </div>
       <div class="row">
