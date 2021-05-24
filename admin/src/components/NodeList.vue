@@ -127,6 +127,13 @@
             <h2 class="text-h4 q-ma-none q-mb-sm">
               Connection string
             </h2>
+            <div class="q-mb-md">
+              <q-select
+                v-model="readPreference"
+                :options="readPreferenceOptions"
+                float-label="Read Preference"
+              />
+            </div>
             <p>{{ buildConnectionString() }}</p>
             <p><em>Note: Connection string does not include arbiter node.</em></p>
           </q-card>
@@ -169,7 +176,33 @@ export default {
 
   data () {
     return {
-      connectionStringDialog: false
+      connectionStringDialog: false,
+      readPreference: {
+        value: 'primary',
+        label: 'primary'
+      },
+      readPreferenceOptions: [
+        {
+          label: 'primary',
+          value: 'primary'
+        },
+        {
+          label: 'primaryPreferred',
+          value: 'primaryPreferred'
+        },
+        {
+          label: 'secondary',
+          value: 'secondary'
+        },
+        {
+          label: 'secondaryPreferred',
+          value: 'secondaryPreferred'
+        },
+        {
+          label: 'nearest',
+          value: 'nearest'
+        }
+      ]
     }
   },
 
@@ -212,6 +245,10 @@ export default {
       }
 
       url += `/admin?replicaSet=rs0`
+
+      if (this.readPreference) {
+        url += `&readPreference=${this.readPreference.value}`
+      }
 
       return url
     },
