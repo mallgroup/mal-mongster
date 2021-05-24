@@ -15,6 +15,9 @@
         <q-toolbar-title>
           Mongster
         </q-toolbar-title>
+
+        <q-space />
+        {{ version }}
       </q-toolbar>
     </q-header>
 
@@ -78,7 +81,8 @@ export default {
   name: 'LayoutDefault',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      version: 'v4.4.6'
     }
   }
 }

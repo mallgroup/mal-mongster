@@ -1,10 +1,32 @@
 <template>
   <q-page class="q-pa-md">
-    <p>
-      Are you ready to take your MongoDB experience to the next level?
-      Now you can easily connect your nodes within each other.
-    </p>
-    <p><br></p>
+    <div class="row q-gutter-md">
+      <div class="col-12 text-h6 text-italic text-grey">
+        Are you ready to take your MongoDB experience to the next level?
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <q-card>
+              <q-card-section class="text-h4">
+                Clusters
+              </q-card-section>
+
+              <q-separator />
+
+              <q-card-actions>
+                <q-btn
+                  type="link"
+                  flat
+                  class="full-width"
+                  :to="{ name: 'cluster.list' }"
+                >manage clusters</q-btn>
+              </q-card-actions>
+            </q-card>
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       class="fixed-bottom text-right q-ma-md"
     >
