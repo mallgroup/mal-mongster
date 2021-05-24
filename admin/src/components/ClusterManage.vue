@@ -85,11 +85,11 @@
         <div class="col">
           <q-input
             v-model="form.authenticationDatabase"
-            :readonly="isEdit"
+            readonly
             :error="$v.form.authenticationDatabase.$error"
             error-message="Check the authentication database option."
-            label="Authentication Database *"
-            :hint="form.id.length ? `Already configured.` : `Admin DB that holds authentication. Do not change the option if not necessary.`"
+            label="Authentication Database"
+            hint="Admin DB that holds authentication. It is 'admin' by default."
             @blur="$v.form.authenticationDatabase.$touch"
             @keyup.enter="save()"
           />
@@ -98,6 +98,7 @@
       <div class="row">
         <div class="col">
           <q-input
+            type="textarea"
             v-model="form.authKey"
             :readonly="isEdit"
             :error="$v.form.authKey.$error"
