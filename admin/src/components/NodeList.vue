@@ -36,15 +36,6 @@
             <td
               style="vertical-align: top"
             >
-              <q-btn
-                color="primary"
-                icon="clear"
-                label="delete"
-                dense
-                size="sm"
-                class="q-mr-sm q-mb-sm full-width"
-                @click.native="$emit(`onDestroy`, node, index)"
-              />
               <template v-if="nodeState(node) && isConfigurable">
                 <template v-if="nodeState(node) && nodeState(node).rsConfig && [1, 7].indexOf(nodeState(node).rsState) === -1">
                   <q-btn
@@ -105,6 +96,27 @@
                   size="sm"
                   class="q-mr-sm q-mb-sm full-width"
                   @click.native="$emit(`onDockerRestart`, node, index)"
+                />
+
+                <q-btn
+                  :disabled="!nodeState(node).alive || nodeState(node).rsState === 1"
+                  color="red"
+                  icon="bolt"
+                  label="force primary"
+                  dense
+                  size="sm"
+                  class="q-mr-sm q-mb-sm full-width"
+                  @click.native="$emit(`onForcePrimary`, node, index)"
+                />
+
+                <q-btn
+                  color="red"
+                  icon="clear"
+                  label="delete"
+                  dense
+                  size="sm"
+                  class="q-mr-sm q-mb-sm full-width"
+                  @click.native="$emit(`onDestroy`, node, index)"
                 />
               </template>
             </td>

@@ -57,6 +57,7 @@ module.exports.routes = {
   'DELETE /v1/cluster/node/:id': 'v1/cluster/node/destroy',
   'PATCH /v1/cluster/node/:id/toggle-vote': 'v1/cluster/node/toggle-vote',
   'PATCH /v1/cluster/node/:id/priority': 'v1/cluster/node/priority',
+  'PATCH /v1/cluster/node/:id/force-primary': 'v1/cluster/node/force-primary',
   'GET /v1/cluster/node/:id/backup/download/:directory': 'v1/cluster/node/backup-download',
   'GET /v1/cluster/node/:id/backup': 'v1/cluster/node/backup-list',
   'POST /v1/cluster/node/:id/backup': 'v1/cluster/node/backup-generate',

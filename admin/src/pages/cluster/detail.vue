@@ -64,6 +64,7 @@
             :has-primary-node="hasPrimaryNode"
             @onDestroy="destroy"
             @onDockerRestart="restartDocker"
+            @onForcePrimary="forcePrimary"
             @onRefresh="fetchData(true)"
           />
           <q-banner
@@ -302,6 +303,40 @@ export default {
 
         promise.catch((response) => {
           this.$notify.negative('It is not possible to restart a Docker container on the node. Please try it again.')
+
+          // eslint-disable-next-line no-console
+          console.error(response)
+        })
+
+        promise.finally(() => this.$q.loading.hide())
+      })
+    },
+
+    forcePrimary (node, index) {
+      this.$q.dialog({
+        color: 'red',
+        title: 'Force Primary',
+        html: true,
+        message: `
+          Are you sure you want to force this node being primary in the replica set?
+          <br>
+          Node: <em>${node.hostname}</em>
+          <br><br>
+          This will remove priority and voting on all other servers registered in the replica set.
+          `,
+        ok: 'Force',
+        cancel: 'Cancel'
+      }).onOk(() => {
+        this.$q.loading.show()
+
+        let promise = this.$axios.patch(`/v1/cluster/node/${node.id}/force-primary`)
+
+        promise.then(() => {
+          this.$notify.positive(`Node <em>${node.hostname}</em> forced to be primary. Please wait. It might take a while.`)
+        })
+
+        promise.catch((response) => {
+          this.$notify.negative('It is not possible to force this node being primary. Please try it again.')
 
           // eslint-disable-next-line no-console
           console.error(response)

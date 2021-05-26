@@ -1,0 +1,23 @@
+RESULT=$(<%- partial('./partials/mongo-connect').trim() -%> \
+--eval "
+    var cfg = rs.config()
+
+    cfg.members = cfg.members.map((node) => {
+        if (node.host === '<%= NODE_HOSTNAME %>:<%= MONGO_PORT %>') {
+            node.votes = 1
+            node.priority = 1
+        } else {
+            node.votes = 0
+            node.priority = 0
+        }
+        return node
+    })
+
+    rs.reconfig(cfg, { force: true }).ok === 0 ? 1 : 0 // we have to convert to unix based result
+") &> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.NODE_FORCE_PRIMARY.message) %>" && exit 1
+fi
+
+echo "<%= status.success(`$RESULT`) %>"

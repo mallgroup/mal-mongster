@@ -26,6 +26,9 @@ module.exports.errors = {
   NODE_CHANGE_PRIORITY: {
     message: `It is not possible to change priority on the node.`
   },
+  NODE_FORCE_PRIMARY: {
+    message: `It is not possible to force primary state on the node.`
+  },
   NODE_DATABASE_LIST: {
     message: `It is not possible to list databases on the node.`
   },

@@ -69,7 +69,7 @@
     >
       Priority: {{ rsConfig.priority || 0 }}
       |
-      Votes: {{ rsConfig.votes || 0 }}
+      Votes: {{ rsConfig.votes === 1 ? 'yes' : 'no' }}
 
       <!-- Votes plus priority has to be greater or equal to 2 -->
       <q-icon
