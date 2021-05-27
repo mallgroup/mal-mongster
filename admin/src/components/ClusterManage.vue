@@ -143,7 +143,7 @@
           <li>
             <strong>Backup</strong>
             <br>
-            It uses tool mongodump, which saves data into folder <em>/data/backup</em> every day at 00:00
+            It uses tool called <i>mongodump</i>, which saves data into folder <em>/data/backup</em> every day at 00:00
           </li>
         </ul>
       </div>
