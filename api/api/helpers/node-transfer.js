@@ -52,7 +52,7 @@ module.exports = {
     let conn = new Client()
     conn
       .connect({
-        readyTimeout: 10000,
+        readyTimeout: 30000,
         host: inputs.node.hostname,
         port: 22,
         username: 'root',

@@ -154,7 +154,7 @@ module.exports = {
 
       return exits.sshExecutionFailed()
     }).connect({
-      readyTimeout: 10000,
+      readyTimeout: 30000,
       host: inputs.hostname,
       port: 22,
       username: 'root',

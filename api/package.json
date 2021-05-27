@@ -12,9 +12,9 @@
     "sails-disk": "^1.0.1",
     "sails-hook-orm": "^2.0.0-16",
     "sails-mongo": "^1.0.1",
-    "ssh2": "^0.6.1",
+    "ssh2": "^0.8.9",
     "strong-cryptor": "2.0.*",
-    "ssh2-sftp-client": "^5.1.2"
+    "ssh2-sftp-client": "^6.0.1"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3",
