@@ -36,7 +36,7 @@
         <q-tab
           v-if="isConfigurable"
           name="backup"
-          label="Backup"
+          label="Backup & Restore"
           icon="storage"
         />
       </q-tabs>
@@ -88,7 +88,7 @@
           v-if="hasPrimaryNode"
           name="backup"
         >
-          <database-backup />
+          <database-backup-restore />
         </q-tab-panel>
       </q-tab-panels>
     </template>
@@ -105,7 +105,7 @@
 <script>
 import DatabaseList from '../../components/DatabaseList'
 import ClusterNodeManage from '../../components/ClusterNodeManage'
-import DatabaseBackup from '../../components/DatabaseBackup'
+import DatabaseBackupRestore from '../../components/DatabaseBackupRestore'
 import NodeList from '../../components/NodeList'
 
 export default {
@@ -114,7 +114,7 @@ export default {
     DatabaseList,
     ClusterNodeManage,
     NodeList,
-    DatabaseBackup
+    DatabaseBackupRestore
   },
   data () {
     return {

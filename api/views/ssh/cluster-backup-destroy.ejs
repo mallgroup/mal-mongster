@@ -1,0 +1,11 @@
+RESTORE_DIR="<%= DATA_BACKUP_DIR %>"
+DIRECTORY_TO_DESTROY="$RESTORE_DIR/<%= DIRECTORY_TO_DESTROY %>"
+
+sudo rm -rf "$DIRECTORY_TO_DESTROY"
+&> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_DESTROY.message) %>" && exit 1
+fi
+
+echo "<%= status.success('ok') %>"
