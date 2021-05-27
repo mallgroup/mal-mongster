@@ -99,7 +99,7 @@
                 />
 
                 <q-btn
-                  :disabled="!nodeState(node).alive || nodeState(node).rsState === 1"
+                  :disabled="!nodeState(node).alive || [1, 7].indexOf(nodeState(node).rsState) > -1"
                   color="red"
                   icon="bolt"
                   label="force primary"
