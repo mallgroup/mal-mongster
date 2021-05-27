@@ -1,0 +1,16 @@
+RESTORE_DIR="<%= DATA_BACKUP_DIR %>"
+DIRECTORY_TO_RESTORE="$RESTORE_DIR/<%= DIRECTORY_TO_RESTORE %>"
+
+sudo docker exec <%= CONTAINER_NAME %> \
+  mongorestore --username <%= MONGO_INITDB_ROOT_USERNAME %> \
+  --password <%= MONGO_INITDB_ROOT_PASSWORD %> \
+  --authenticationDatabase <%= AUTHENTICATION_DATABASE %> \
+  "$DIRECTORY_TO_RESTORE" \
+  --quiet --drop
+&> /dev/null
+
+if [ "$?" -eq 1 ]; then
+    echo "<%= status.error(errors.CLUSTER_RESTORE.message) %>" && exit 1
+fi
+
+echo "<%= status.success('ok') %>"

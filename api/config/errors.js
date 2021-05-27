@@ -59,6 +59,12 @@ module.exports.errors = {
   CLUSTER_BACKUP: {
     message: `It is not possible to backup a cluster.`
   },
+  CLUSTER_RESTORE: {
+    message: `It is not possible to restore a backup.`
+  },
+  CLUSTER_DESTROY: {
+    message: `It is not possible to remove a backup.`
+  },
   CLUSTER_TAR: {
     message: `It is not possible to archive the folder.`
   }
