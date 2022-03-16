@@ -30,43 +30,32 @@ You need
 
 ## Docker containers with Docker Compose
 
-Run containers with Docker Compose:
+### Create a `.env` file
+
+Copy `.env.example` file to `.env` file. You can leave default variables. No need for change.
+
+### Run containers
+
+Run containers with Docker Compose on background:
 
 ```sh
-docker-compose down && docker-compose -p mal-mongster up
+docker-compose down && docker-compose up -d
 ```
 
-Or on the background:
-
-```sh
-docker-compose down && docker-compose -p mal-mongster up -d
-```
-
-Admin panel appears on URL <http://localhost:8080>. It might take a minute or two.
+Admin panel appears on URL <http://localhost:8080>. However it might take a minute or two.
 
 ### Database
 
-Mongster uses custom MongoDB to store all data. The database data directory is placed in the Docker volume that has been created on startup. So in case, you remove all volumes, you also lose data you stored in this database. So it is highly recommended to mount the data directory somewhere else.
+The database data directory is placed in the root of this project in the `mongodb_data` folder.
 
-#### Change volumes
+#### Changing volumes
 
-In case you remove volumes, you also lose the data you saved earlier. So it might be helpful to map Mongo volume to some other location on your disk.
-
-Open [docker-compose.yml](/docker-compose.yml) file and replace this line:
+You can change the volume path. Open [docker-compose.yml](/docker-compose.yml) file and replace the part with volumes - `./mongodb_data` - with a path of your choice:
 
 ```yaml
 volumes:
-  - mongodb_data:/bitnami
+  - ./mongodb_data:/data
 ```
-
-with content like:
-
-```yaml
-volumes:
-  - ./my_local_db_folder:/bitnami
-```
-
-You can replace the `./my_local_db_folder` with the directory you expect Mongo to store the data.
 
 ### Local development
 

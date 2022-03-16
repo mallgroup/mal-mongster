@@ -3,33 +3,33 @@ version: '3'
 services:
   api:
     restart: always
-    container_name: api
+    container_name: mongster-api
     ports:
       - "1337:1337"
     image: ghcr.io/mallgroup/mal-mongster/api:4.4
     environment:
-      NODE_ENV: production
-      CONFIG_CORS_ALLOW_ORIGINS: '*'
-      MONGO_CONNECTION: mongodb:27017/mongster
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
+      - NODE_ENV
+      - MONGO_CONNECTION
+    networks:
+      - mongster
 
   admin:
-    container_name: admin
+    container_name: mongster-admin
     ports:
       - "8080:80"
     image: ghcr.io/mallgroup/mal-mongster/admin:4.4
-    depends_on:
-      - api
+    networks:
+      - mongster
 
   mongodb:
-    container_name: mongo
+    container_name: mongster-mongo
     image: ghcr.io/mallgroup/mal-mongster/mongo:4.4.6-bionic
     ports:
       - "27017:27017"
+    networks:
+      - mongster
+    volumes:
+      - ./mongodb_data:/data
 
-volumes:
-  mongodb_data:
-    driver: local
+networks:
+  mongster:

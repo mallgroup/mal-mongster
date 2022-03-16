@@ -19,3 +19,6 @@ coverage
 *.lcov
 
 docker-compose-dev.yml
+
+.env
+mongodb_data/
