@@ -50,11 +50,11 @@ The database data directory is placed in the root of this project in the `mongod
 
 #### Changing volumes
 
-You can change the volume path. Open [docker-compose.yml](/docker-compose.yml) file and replace the part with volumes - `./mongodb_data` - with a path of your choice:
+You can change the path Mongo uses to share persistent data. Open [docker-compose.yml](/docker-compose.yml) file and replace the part with volumes - `./mongodb_data` - with a path of your choice:
 
 ```yaml
 volumes:
-  - ./mongodb_data:/data
+  - ./mongodb_data:/data/db
 ```
 
 ### Local development

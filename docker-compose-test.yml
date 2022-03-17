@@ -2,7 +2,6 @@ version: '3'
 
 services:
   api:
-    restart: always
     container_name: mongster-api
     ports:
       - "1337:1337"
@@ -12,14 +11,13 @@ services:
       - MONGO_CONNECTION
     networks:
       - mongster
-
-  admin:
-    container_name: mongster-admin
-    ports:
-      - "8080:80"
-    image: ghcr.io/mallgroup/mal-mongster/admin:4.4
-    networks:
-      - mongster
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    command: npm test
+    build:
+      context: .
+      dockerfile: Dockerfile-api
 
   mongodb:
     container_name: mongster-mongo
@@ -28,8 +26,6 @@ services:
       - "27017:27017"
     networks:
       - mongster
-    volumes:
-      - ./mongodb_data:/data/db
 
 networks:
   mongster:
